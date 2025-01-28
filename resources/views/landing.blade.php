@@ -87,7 +87,7 @@
                 </li>
 
             </ul>
-            <a href="https://templatedeck.com/klar-html-template.html" aria-label="Download this template" class="btn btn-outline-light">
+            <a aria-label="Download this template" class="btn btn-outline-light">
                 <small>Book Now</small>
             </a>
         </div>
@@ -127,6 +127,9 @@
                         <a href="minibus" class="link-container zoom-image">
                             <img src="img/webp/abstract18.webp" width="2280" height="1732" alt="abstract image" class="img-fluid position-relative rounded-5 shadow " data-aos="fade-up">
                         </a>
+                        <div class="image-namem mt-2 text-center">
+                            <p class="text-muted">Minibus</p> 
+                        </div>
                     </div>
 
 
@@ -134,6 +137,9 @@
                         <a href="private-vehicle" class="link-container zoom-image">
                             <img src="img/webp/abstract6.webp" width="1116" height="1578" alt="abstract image" class="img-fluid position-relative rounded-5 shadow " data-aos="fade-up" data-aos-duration="2000">
                         </a>
+                        <div class="image-namep mt-2 text-center">
+                            <p class="text-muted">Private Vehicle</p> 
+                        </div>
                     </div>
 
 
@@ -141,6 +147,9 @@
                         <a href="safari" class="link-container zoom-image">
                             <img src="img/webp/abstract9.webp" width="1116" height="848" alt="abstract image" class="img-fluid position-relative rounded-5 shadow " data-aos="fade-up" data-aos-duration="3000">
                         </a>
+                        <div class="image-names mt-2 text-center">
+                            <p class="text-muted">Safari</p> 
+                        </div>
                     </div>
 
                 </div>
@@ -195,10 +204,8 @@
                             <div class="bg-dark shadow rounded-5 p-0 padding_tp" style="background-image: url('img/webp/abstract3.webp');min-height: 458px;margin: 15%;background-size: cover;background-position: center;">
 
                                 <div class="p-5 card_overlay">
-                                    <h2 class="fw-lighter">Ipsum dolor est</h2>
-                                    <p class="pb-4 text-secondary">Lorem ipsum dolor sit amet, consetetur sadipscing
-                                        elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-                                        erat.</p>
+                                    <h2 class="fw-lighter">Safari Experience</h2>
+                                    <p class="pb-4 text-secondary">Thrilling wildlife encounters at Udawalawe National Park with majestic elephants, vibrant birds, and stunning landscapes.</p>
                                     <a href="#" class="link-fancy link-fancy-light gold">Read more</a>
                                 </div>
                             </div>
@@ -208,10 +215,8 @@
                             <div class="bg-dark shadow rounded-5 p-0 padding_tp" style="background-image: url('img/webp/abstract2.webp');min-height: 458px;margin: 15%;background-size: cover;background-position: center;">
 
                                 <div class="p-5 card_overlay">
-                                    <h2 class="fw-lighter">Ipsum dolor est</h2>
-                                    <p class="pb-4 text-secondary">Lorem ipsum dolor sit amet, consetetur sadipscing
-                                        elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-                                        erat.</p>
+                                    <h2 class="fw-lighter">Private Taxi Experience</h2>
+                                    <p class="pb-4 text-secondary">Impeccable service with punctual, friendly drivers, clean vehicles, and a comfortable, hassle-free journey.</p>
                                     <a href="#" class="link-fancy link-fancy-light gold">Read more</a>
                                 </div>
                             </div>
@@ -226,10 +231,8 @@
                             <div class="bg-dark shadow rounded-5 p-0 padding_tp" style="background-image: url('img/webp/abstract17.webp');min-height: 458px;margin: 15%;background-size: cover;background-position: center;">
 
                                 <div class="p-5 card_overlay">
-                                    <h2 class="fw-lighter">Ipsum dolor est</h2>
-                                    <p class="pb-4 text-secondary">Lorem ipsum dolor sit amet, consetetur sadipscing
-                                        elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-                                        erat.</p>
+                                    <h2 class="fw-lighter">Mini Bus Experience</h2>
+                                    <p class="pb-4 text-secondary">Convenient group travel with spacious seating, air conditioning, and smooth rides through scenic Sri Lankan landscapes.</p>
                                     <a href="#" class="link-fancy link-fancy-light gold">Read more</a>
                                 </div>
                             </div>
@@ -239,10 +242,8 @@
                             <div class="bg-dark shadow rounded-5 p-0 padding_tp" style="background-image: url('img/webp/abstract4.webp');min-height: 458px;margin: 15%;background-size: cover;background-position: center;">
 
                                 <div class="p-5 card_overlay">
-                                    <h2 class="fw-lighter">Ipsum dolor est</h2>
-                                    <p class="pb-4 text-secondary">Lorem ipsum dolor sit amet, consetetur sadipscing
-                                        elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-                                        erat.</p>
+                                    <h2 class="fw-lighter">Customer Care Experience</h2>
+                                    <p class="pb-4 text-secondary">Exceptional support with friendly staff, prompt responses, and a genuine commitment to ensuring customer satisfaction.</p>
                                     <a href="#" class="link-fancy link-fancy-light gold">Read more</a>
                                 </div>
                             </div>
@@ -423,7 +424,7 @@
             </div>
 
         </div>
-
+        <!-- <div id="reviews-container"></div> -->
     </main>
     <hr class="ft_hide" style="color:#FC8E01;height: 3px;background-color: #FC8E01;">
     <footer class="bg-black border-top border-dark ft_hide">
@@ -433,6 +434,7 @@
                     <a class="navbar-brand pe-md-4 fs-4 col-12 col-md-auto text-center" href="index.html">
                         <img src="img/webp/logo.webp" style="height: 36px;width:auto" alt="abstract image">
                     </a>
+                    
 
                 </div>
                 <div class="col border-end border-dark">
@@ -442,59 +444,28 @@
                             <a href="#" class="link-fancy link-fancy-light">About us</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="link-fancy link-fancy-light">Legal</a>
+                            <a href="#" class="link-fancy link-fancy-light">Services</a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="link-fancy link-fancy-light">Career</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="link-fancy link-fancy-light">Contact</a>
+                            <a href="#" class="link-fancy link-fancy-light">Home</a>
                         </li>
                     </ul>
                 </div>
                 <div class="col border-end border-dark">
-                    <span class="h6">Services</span>
+                    <span class="h6">Contacts</span>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a href="#" class="link-fancy link-fancy-light">Pricing</a>
+                            <a href="#" class="link-fancy link-fancy-light">Askeztaxi@gmail.com</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="link-fancy link-fancy-light">Products</a>
+                            <a href="#" class="link-fancy link-fancy-light">+94 77 437 3545</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="#" class="link-fancy link-fancy-light">Customers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="link-fancy link-fancy-light">Portfolio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="link-fancy link-fancy-light">Success Stories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="link-fancy link-fancy-light">More</a>
-                        </li>
+                        
                     </ul>
                 </div>
-                <div class="col">
-                    <span class="h6">Support</span>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a href="#" class="link-fancy link-fancy-light">About us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="link-fancy link-fancy-light">Legal</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="link-fancy link-fancy-light">Career</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="link-fancy link-fancy-light">Contact</a>
-                        </li>
-                    </ul>
-                </div>
+                
             </div>
         </div>
 
@@ -517,9 +488,81 @@
             duration: 800, // values from 0 to 3000, with step 50ms
         });
     </script>
-    <script>
+    <!-- <script>
+        const apiKey = 'AIzaSyA01Q98EvUK0YMXsf4qa_3UUPrhNTB_hBQ';
+            // Google Place ID for your business
+            const placeId = 'Ez Taxi';
+            const reviewContainer = document.getElementById('reviews-container');
 
-    </script>
+            // Function to fetch reviews
+            function fetchGoogleReviews() {
+                const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${placeId}&key=${apiKey}`;
+                // const url = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${apiKey}`;
+                // const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=PLACE_NAME&inputtype=textquery&key=YOUR_API_KEY
+
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        const reviews = data.result.reviews;
+                        if (reviews && reviews.length > 0) {
+                            reviews.forEach(review => {
+                                const reviewElement = document.createElement('div');
+                                reviewElement.classList.add('review-item');
+                                reviewElement.innerHTML = `
+                                    <div class="fs-1">
+                                        ${getStars(review.rating)}
+                                    </div>
+                                    <p class="lead">${review.text}</p>
+                                    <div class="d-flex justify-content-start align-items-center pt-3">
+                                        <div>
+                                            <span class="h6 fw-5">${review.author_name}</span><br>
+                                            <small>${new Date(review.time * 1000).toLocaleDateString()}</small>
+                                        </div>
+                                    </div>
+                                `;
+                                reviewContainer.appendChild(reviewElement);
+                            });
+                        } else {
+                            reviewContainer.innerHTML = '<p>No reviews found.</p>';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching reviews:', error);
+                        reviewContainer.innerHTML = '<p>Error fetching reviews.</p>';
+                    });
+            }
+
+            // Helper function to convert star rating to SVG icons
+            function getStars(rating) {
+                const fullStars = Math.floor(rating);
+                const halfStar = rating % 1 !== 0;
+                let stars = '';
+
+                for (let i = 0; i < fullStars; i++) {
+                    stars += `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+                    `;
+                }
+
+                if (halfStar) {
+                    stars += `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-half" viewBox="0 0 16 16">
+                            <path d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" />
+                        </svg>
+                    `;
+                }
+
+                return stars;
+            }
+
+            // Call the function to fetch reviews when the page loads
+            window.onload = function () {
+                fetchGoogleReviews();
+            };
+    </script> -->
     <script>
         $(document).ready(function() {
             console.log('run');

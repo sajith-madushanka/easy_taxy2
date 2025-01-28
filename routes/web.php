@@ -25,7 +25,9 @@ Route::get('/private-vehicle', [PageController::class, 'private'])->name('privat
 Route::get('/safari', [PageController::class, 'safari'])->name('safari');
 
 Route::get('/minibus/destination', [PageController::class, 'minibusDestination']);
-Route::get('/minibus/date_seats', [PageController::class, 'minibusDateSeats']);
+Route::post('/minibus/date_seats', [PageController::class, 'minibusDateSeats']);
+Route::post('/minibus/get_price', [PageController::class, 'minibusGetPrice']);
+Route::post('/minibus/book', [PageController::class, 'minibusBook']);
 
 
 Route::controller(AuthController::class)->group(function(){

@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
     <meta name="HandheldFriendly" content="true">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>EzTaxi</title>
     {{-- <link rel="stylesheet" href="css/theme.min.css"> --}}
     <link rel="stylesheet" href="css/theme.css">
@@ -102,25 +103,25 @@
 
                     </div>
                     <div class="col-12 col-lg-5" data-aos="fade-left" id="seat_div">
-                        <div id='dropdowntitle' class='dropdowntitle'> Destination</div>
+                        <div  class='dropdowntitle'> Destination</div>
                         <div class="custom-select">
-                            <select class="form_field " id="select_div">
+                            <select class="form_field "   id="select_div">
                             </select>
                         </div>
-                        <div id='dropdowntitle' class='dropdowntitle'> Date</div>
-                        <input class="form_field" id="date" type="date">
+                        <div  class='dropdowntitle'> Date</div>
+                        <input class="form_field" id="date" onchange="get_seats(this.value)"  type="date">
 
                         </input>
-                        <div id='dropdowntitle' class='dropdowntitle'> Seat No</div>
+                        <div class='dropdowntitle'> Seat No</div>
                         <div onclick="openSeats()" class="form_field" style="padding: 0;">
-                            <input class="form_field" style="border: none;" type="text" readonly>
+                            <input id="seat_name" class="form_field" style="border: none;" type="text" readonly>
                             <img src="img/webp/selected.webp" style="height: 21px;float: right; margin: 10px;"></img>
                         </div>
 
-                        <div class="price-box" style=" display: none;>
-                            <h2 class=" price-2" data-aos="zoom-in-left">6000 LKR</h2>
+                        <div class="price-box" id="price_div"  style=" display: none;">
+                            <h2 class=" price-2"  id="price" data-aos="zoom-in-left"></h2>
                         </div>
-                        <div class="price-box" style=" display: none;>
+                        <div class="price-box"   id="book_now" style=" display: none;">
                             <a onclick=" minibusBook()" class="btn btn-xl btn-light select-book">Book Now
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
@@ -129,11 +130,11 @@
                         </div>
                     </div>
                     <div class="col-12 col-lg-5" data-aos="fade-left" id="minibusbook" style=" display: none;">
-                        <div id='dropdowntitle' class='dropdowntitle'>Full Name</div>
-                        <input class="form_field" type="text" placeholder="Enter Name">
+                        <div  class='dropdowntitle'>Full Name</div>
+                        <input id='name' class="form_field" type="text" placeholder="Enter Name">
 
                         </input>
-                        <div id='dropdowntitle' class='dropdowntitle'> Mobile Number in Use </div>
+                        <div  class='dropdowntitle'> Mobile Number in Use </div>
                         <div class="form_field" style="padding: 0;">
                             <input id="telinput" style="border: none;" class="form_field" type="tel">
 
@@ -141,22 +142,33 @@
                         </div>
 
 
-                        <div id='dropdowntitle' class='dropdowntitle'>Note</div>
-                        <input class="form_field" type="text" placeholder="Enter Note">
+                        <div  class='dropdowntitle'>Note</div>
+                        <input class="form_field" id='note' type="text" placeholder="Enter Note">
 
                         </input>
 
 
 
                         <div class="price-box">
-                            <h2 class="price-2" data-aos="zoom-in-left">6000 LKR</h2>
+                            <h2 class="price-2" id="price_2" data-aos="zoom-in-left"></h2>
                         </div>
                         <div class="price-box">
-                            <a href="#" class="btn btn-xl btn-light select-book">Proceed
+                            <a onclick=" Book()" class="btn btn-xl btn-light select-book">Proceed
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
                                 </svg>
                             </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5" data-aos="fade-left" id="booking-confirmation" style="display: none;">
+                        <div class="confirmation-message">
+                            <h2 class="confirmation-title">Booking Confirmed!</h2>
+                            <p class="confirmation-text">
+                                Your booking has been successfully confirmed. You will receive a confirmation message shortly.
+                            </p>
+                            <div class="confirmation-btn">
+                                <a href="/" class="btn btn-xl btn-light select-book">Home</a>
+                            </div>
                         </div>
                     </div>
                     <div class="seat_select col-12 col-lg-5" data-aos="fade-left" id="seat_div_popup" style=" display: none;">
@@ -295,10 +307,7 @@
 
         }
 
-        document.getElementById('date').addEventListener('change', function() {
-            var selectedDate = this.value;
-            myFunction(selectedDate);
-        });
+        
 
         function get_seats(date) {
             booked_seats.forEach(seatNumber => {
@@ -365,39 +374,73 @@
 
         function confirmSeats() {
             if (selected_seats != []) {
+                $seat_names = [];
+                const seatMap = {
+                    1: "1-A",
+                    2: "2-A",
+                    3: "2-B",
+                    4: "2-C",
+                    5: "3-A",
+                    6: "3-B",
+                    7: "3-C"
+                };
+
+
+                const seatNames = selected_seats.map(seatId => seatMap[seatId]);
+
+                const selectedSeatsString = seatNames.join(", ");
+                $('#seat_name').val(selectedSeatsString);
                 $.ajax({
                     url: '{{ url("minibus/get_price") }}',
                     type: 'POST',
-                    data: {
-                        selected_seats: selected_seats,
-                        destination: $('#amount').val()
-
-                    },
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
+                    data: {
+                        selected_seats: selected_seats,
+                        destination: $('#select_div').val(),
+                        date: $('#date').val()
+                    },
+                   
                     dataType: 'json',
 
                     success: function(response) {
-                        $('#select_div').html(response.data);
-                        response.booked_seats.forEach(seatNumber => {
-                            let seatId = `seat_${seatNumber}`;
-                            let seatElement = document.getElementById(seatId);
-
-                            if (seatElement) {
-                                seatElement.classList.remove('notselected');
-                                seatElement.classList.add('selected');
-                            }
-                        });
-                        booked_seats = response.booked_seats;
-
+                        $('#price_div').show();
+                        $('#price').text(response.price + "LKR");
+                        $('#price_2').text(response.price + "LKR");
+                        $('#book_now').show();
                     }
                 });
-                booked_seats_confirmed = booked_seats;
                 $('#seat_div_popup').hide();
                 $('#seat_div').show();
             }
 
+        }
+
+        function Book() {
+
+                $.ajax({
+                    url: '{{ url("minibus/book") }}',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        selected_seats: selected_seats,
+                        destination: $('#select_div').val(),
+                        date: $('#date').val(),
+                        name: $('#name').val(),
+                        phone: $('#telinput').val(),
+                        note: $('#note').val()
+                    },
+                   
+                    dataType: 'json',
+
+                    success: function(response) {
+                        $('#minibusbook').hide();
+                        $('#booking-confirmation').show();
+                    }
+                });
         }
 
 

@@ -10365,3 +10365,19 @@ select option {
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow */
   }
     
+
+  .image-namem p {
+    font-size: 27px;
+    margin-top: -65px;
+    color: #333;  /* Adjust the color */
+}
+.image-namep p {
+  font-size: 27px;
+  margin-top: -12px;
+  color: #333;  /* Adjust the color */
+}
+.image-names p {
+  font-size: 27px;
+  margin-top: -8px;
+  color: #333;  /* Adjust the color */
+}
