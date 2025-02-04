@@ -154,6 +154,12 @@
                                                                     <input id="amount" type="number" step="0.01" class="form-control" placeholder="Enter price">
                                                                 </div>
                                                             </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Return Trip</label>
+                                                                <div class="col-sm-10">
+                                                                    <input id="return_trip" type="number" step="0.01" class="form-control" placeholder="Enter price">
+                                                                </div>
+                                                            </div>
 
                                                         </form>
                                                         <div style="text-align: center;">
@@ -314,7 +320,8 @@
                 data: {
                     pickup: $('#pickup').val(),
                     destination: $('#destination').val(),
-                    amount: $('#amount').val()
+                    amount: $('#amount').val(),
+                    return_trip: $('#return_trip').val()
                 },
                 dataType: 'json',
 
@@ -341,7 +348,8 @@
                 data: {
                     pickup: $('#pickup').val(),
                     destination: $('#destination').val(),
-                    amount: $('#amount').val()
+                    amount: $('#amount').val(),
+                    return_trip: $('#return_trip').val(),
                 },
                 dataType: 'json',
 
@@ -365,6 +373,7 @@
         $('#pickup').val('');
         $('#destination').val('');
         $('#amount').val('');
+        $('#return_trip').val('');
     }
 
     function delete_data(id) {
@@ -400,11 +409,12 @@
     }
 
 
-    function edit_data(id, pickup , destination, amount) {
+    function edit_data(id, pickup , destination, amount,return_trip) {
         data_id = id;
         $('#pickup').val(pickup);
         $('#destination').val(destination);
         $('#amount').val(amount);
+        $('#return_trip').val(return_trip);
     }
 </script>
 

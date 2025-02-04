@@ -13,5 +13,6 @@ class PrivatePrice extends Model
         'pickup',
         'destination',
         'amount',
+        'return_trip'
     ];
 }

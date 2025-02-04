@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="HandheldFriendly" content="true">
     <title>EzTaxi</title>
     {{-- <link rel="stylesheet" href="css/theme.min.css"> --}}
@@ -104,34 +105,34 @@
                 <div class="col-12 col-lg-6"  id="private_div" data-aos="fade-left">
                     <div id='dropdowntitle' class='dropdowntitle'> Pick up</div>
                     <div class="custom-select">
-                        <select class="form_field">
+                        <select class="form_field" id="pickup">
                             <option>Enter Pick up location</option>
                         </select>
                     </div>
-                    <div id='dropdowntitle' class='dropdowntitle'> Destination</div>
+                    <div id='dropdowntitle' class='dropdowntitle' > Destination</div>
                     <div class="custom-select">
-                        <select class="form_field">
+                        <select class="form_field" id="destination">
                             <option>Enter Destinaton</option>
                         </select>
                     </div>
                     <div id='dropdowntitle' class='dropdowntitle'> Date</div>
-                    <input  class="form_field" type="date" >
+                    <input  class="form_field" type="date"  id="date">
                        
                     </input>
                     <div id='dropdowntitle' class='dropdowntitle'> Time</div>
-                    <input  class="form_field" type="time" >
+                    <input  class="form_field" type="time"  id="time">
                        
                     </input>
                     <div id='dropdowntitle' class='dropdowntitle'> Return Trip</div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" style="padding: 7px" type="checkbox" id="flexSwitchCheckDefault">
+                        <input class="form-check-input" id="return" style="padding: 7px" type="checkbox" >
                         <div id='dropdowntitle' class='dropdowntitle' style="padding: 7px"> No</div>
                     </div>
 
-                    <div class="price-box">
-                        <h2 class="price-2" data-aos="zoom-in-left">6000 LKR</h2>
+                    <div class="price-box" id="price_div" style=" display: none;">
+                        <h2 class="price-2" id="price" data-aos="zoom-in-left"></h2>
                     </div>
-                    <div class="price-box">
+                    <div class="price-box"  id="book_now" style=" display: none;">
                         <a onclick="privateBook()"  class="btn btn-xl btn-light select-book">Book Now
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -162,10 +163,10 @@
                     
                     
                     <div class="price-box">
-                        <h2 class="price-2" data-aos="zoom-in-left">6000 LKR</h2>
+                        <h2 class="price-2" data-aos="zoom-in-left"></h2>
                     </div>
                     <div class="price-box">
-                        <a href="#"  class="btn btn-xl btn-light select-book">Proceed
+                        <a onclick=" Book()"   class="btn btn-xl btn-light select-book">Proceed
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-arrow-right" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd"
@@ -174,6 +175,17 @@
                         </a>
                     </div>
                 </div>
+                <div class="col-12 col-lg-5" data-aos="fade-left" id="booking-confirmation" style="display: none;">
+                        <div class="confirmation-message">
+                            <h2 class="confirmation-title">Booking Confirmed!</h2>
+                            <p class="confirmation-text">
+                                Your booking has been successfully confirmed. You will receive a confirmation message shortly.
+                            </p>
+                            <div class="confirmation-btn">
+                                <a href="/" class="btn btn-xl btn-light select-book">Home</a>
+                            </div>
+                        </div>
+                    </div>
             </div>
 </main>
 
@@ -211,33 +223,83 @@
             console.log(scrollpos)
         })
 
-        function openSeats() {
-            $('#seat_div').hide();
-            $('#seat_div_popup').show();
+        
+        $(document).ready(function() {
+
+            load_data();
+        });
+
+        function load_data(keyword) {
+            // Send AJAX request
+            $.ajax({
+                url: '{{ url("private/pickups") }}',
+                type: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'json',
+
+                success: function(response) {
+                     $('#pickup').html(response.data);
+
+                }
+            });
+
         }
 
-        function closeSeats() {
-            $('#seat_div_popup').hide();
-            $('#seat_div').show();
-        }
+        document.getElementById('pickup').addEventListener('change', function() {
+            const pickup = this.value;
+            
+            if (pickup) {
+                $.ajax({
+                    url: '{{ url("private/destinations") }}',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        pickup: pickup
+                    },
+                    dataType: 'json',
 
+                    success: function(response) {
+                        $('#destination').html(response.data);
 
-        function minibusBook() {
-            // document.getElementById('minibusbook').removeAttribute('data-aos');
-            // $('#seat_div').hide();
-            // $('#minibusbook').show();
-            // document.getElementById('minibusbook').setAttribute('data-aos', 'fade-right');
-            // $('#minibusbook').addClass('ani_text');
+                    }
+                });
+            } else {
+                document.getElementById('destination-select').innerHTML = '<option value="" disabled selected>Select the destination</option>';
+            }
+        });
 
-            $('#seat_div').fadeOut('slow');
-            $('#seat_div').hide(); // Hide seat_div with fadeOut animation
-            $('#minibusbook').fadeIn('slow');
-            // Show minibusbook with fadeIn animation
+        document.getElementById('destination').addEventListener('change', function() {
+            const destination = this.value;
+            
+            if (destination) {
+                $.ajax({
+                    url: '{{ url("private/get_price") }}',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        pickup:$('#pickup').val(),
+                        destination: destination,
+                        return_trip:document.getElementById('return').checked
 
-            // Update data-aos attributes dynamically
-            // $('#seat_div').attr('data-aos', 'fade-right');
-            // $('#minibusbook').attr('data-aos', 'fade-left');
-        }
+                    },
+                    dataType: 'json',
+
+                    success: function(response) {
+                        $('#price_div').show();
+                        $('#price').text(response.price + "LKR");
+                        $('#price_2').text(response.price + "LKR");
+                        $('#book_now').show();
+
+                    }
+                });
+            }
+        });
 
         function privateBook() {
 
@@ -246,12 +308,7 @@
             $('#privatebook').fadeIn('slow');
         }
 
-        function privateBook() {
-
-            $('#safari_div').fadeOut('slow');
-            $('#safari_div').hide();
-            $('#safaribook').fadeIn('slow');
-        }
+      
     </script>
 
 </body>

@@ -6,6 +6,8 @@ use App\Http\Controllers\MinibusPriceController;
 use App\Http\Controllers\PrivatePriceController;
 use App\Http\Controllers\SafariPriceController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\GoogleReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,18 +20,38 @@ use App\Http\Controllers\PageController;
 |
 */
 
-
+/*--------------------------------------------------------------------------
+| Landing Routes
+|--------------------------------------------------------------------------*/
 Route::get('/', [PageController::class, 'landing'])->name('landing');
+Route::get('/get-reviews', [GoogleReviewController::class, 'getReviews']);
+
+/*--------------------------------------------------------------------------
+| Minibus Routes
+|--------------------------------------------------------------------------*/
 Route::get('/minibus', [PageController::class, 'minibus'])->name('minibus');
+Route::get('/minibus/destination', [BookingController::class, 'minibusDestination']);
+Route::post('/minibus/date_seats', [BookingController::class, 'minibusDateSeats']);
+Route::post('/minibus/get_price', [BookingController::class, 'minibusGetPrice']);
+Route::post('/minibus/book', [BookingController::class, 'minibusBook']);
+
+/*--------------------------------------------------------------------------
+| Private Routes
+|--------------------------------------------------------------------------*/
 Route::get('/private-vehicle', [PageController::class, 'private'])->name('private-vehicle');
+Route::get('private/pickups', [BookingController::class, 'privatePickup']);
+Route::post('private/destinations', [BookingController::class, 'privateDestinations']);
+Route::post('private/get_price', [BookingController::class, 'privateGetPrice']);
+
+/*--------------------------------------------------------------------------
+| Safari Routes
+|--------------------------------------------------------------------------*/
 Route::get('/safari', [PageController::class, 'safari'])->name('safari');
 
-Route::get('/minibus/destination', [PageController::class, 'minibusDestination']);
-Route::post('/minibus/date_seats', [PageController::class, 'minibusDateSeats']);
-Route::post('/minibus/get_price', [PageController::class, 'minibusGetPrice']);
-Route::post('/minibus/book', [PageController::class, 'minibusBook']);
 
-
+/*--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------*/
 Route::controller(AuthController::class)->group(function(){
     Route::get('/registration','registration')->middleware('alreadyLoggedIn');
     Route::post('/registration-user','registerUser')->name('register-user');
