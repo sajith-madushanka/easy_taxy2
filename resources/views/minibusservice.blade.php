@@ -69,27 +69,7 @@
                 <img src="img/webp/logo.webp" style="height: 36px;width:auto" alt="abstract image" class="img-fluid shadow">
             </a>
 
-            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 list-group list-group-horizontal">
-                <li class="nav-item">
-                    <a class="nav-link fs-5" href="{{ route('landing') }}" aria-label="Homepage">
-                        Home
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fs-5" href="content.html" aria-label="A sample content page">
-                        Services
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fs-5" href="system.html" aria-label="A system message page">
-                        About Us
-                    </a>
-                </li>
-
-            </ul>
-            <a href="https://templatedeck.com/klar-html-template.html" aria-label="Download this template" class="btn btn-outline-light">
-                <small>Book Now</small>
-            </a>
+           
         </div>
     </nav>
 

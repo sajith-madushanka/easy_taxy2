@@ -68,27 +68,7 @@
                 <img src="img/webp/logo.webp" style="height: 36px;width:auto" alt="abstract image" class="img-fluid shadow">
             </a>
 
-            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 list-group list-group-horizontal">
-                <li class="nav-item">
-                    <a class="nav-link fs-5"  href="{{ route('landing') }}" aria-label="Homepage">
-                        Home
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fs-5" href="content.html" aria-label="A sample content page">
-                        Services
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fs-5" href="system.html" aria-label="A system message page">
-                        About Us
-                    </a>
-                </li>
-
-            </ul>
-            <a href="https://templatedeck.com/klar-html-template.html" aria-label="Download this template" class="btn btn-outline-light">
-                <small>Book Now</small>
-            </a>
+           
         </div>
     </nav>
 
@@ -147,6 +127,15 @@
                             </svg>
                         </a>
                     </div>
+                </div>
+                <div class="col-12 col-lg-5" id="safari_div"  data-aos="fade-left">
+                            <h2 class="confirmation-title">Comming Soon!</h2>
+                            <p class="confirmation-text">
+                            This feature is currently under development. Please stay tuned for updates. We appreciate your patience.
+                            </p>
+                            <div class="confirmation-btn">
+                                <a href="/" class="btn btn-xl btn-light select-book">Home</a>
+                            </div>
                 </div>
                 <div class="col-12 col-lg-5" id="safaribook" data-aos="fade-left" style=" display: none;" >
                     <div id='dropdowntitle' class='dropdowntitle'>Full Name</div>
