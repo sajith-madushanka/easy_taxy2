@@ -312,7 +312,7 @@
             </div>
 
         </div>
-        <!-- <div class="bg-dark py-vh-5">
+        <div class="bg-dark py-vh-5">
             <div class="container px-vw-5">
                 <div class="row d-flex gx-5 align-items-center">
                     <div class="col-12 col-lg-6" style="justify-content: center">
@@ -441,8 +441,8 @@
                 </div>
             </div>
 
-        </div> -->
-        <div id="reviews-container"></div>
+        </div>
+        <!-- <div id="reviews-container"></div> -->
     </main>
     <hr class="ft_hide" style="color:#FC8E01;height: 3px;background-color: #FC8E01;">
     <footer id="about_us" class="bg-black border-top border-dark ft_hide">
@@ -592,64 +592,64 @@ function closeModal() {
         //     const placeId = 'ChIJH-opw7Zl5DoRBeKvRmnbNok';
         //     const reviewContainer = document.getElementById('reviews-container');
 
-        const reviewContainer = document.getElementById('reviews-container');
+        // const reviewContainer = document.getElementById('reviews-container');
 
-function fetchGoogleReviews() {
-    fetch( '{{ url("get-reviews") }}')  // Call your Laravel endpoint
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);  // Log the full response data
-            const reviews = data.result.reviews;
-            if (reviews && reviews.length > 0) {
-                reviews.forEach(review => {
-                    const reviewElement = document.createElement('div');
-                    reviewElement.classList.add('review-item');
-                    reviewElement.innerHTML = `
-                        <div class="fs-1">${getStars(review.rating)}</div>
-                        <p class="lead">${review.text}</p>
-                        <div class="d-flex justify-content-start align-items-center pt-3">
-                            <div>
-                                <span class="h6 fw-5">${review.author_name}</span><br>
-                                <small>${new Date(review.time * 1000).toLocaleDateString()}</small>
-                            </div>
-                        </div>
-                    `;
-                    reviewContainer.appendChild(reviewElement);
-                });
-            } else {
-                reviewContainer.innerHTML = '<p>No reviews found.</p>';
-            }
-        })
-        .catch(error => {
-            console.error(error);
-            reviewContainer.innerHTML = '<p>Error fetching reviews.</p>';
-        });
-}
+// function fetchGoogleReviews() {
+//     fetch( '{{ url("get-reviews") }}')  // Call your Laravel endpoint
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log(data);  // Log the full response data
+//             const reviews = data.result.reviews;
+//             if (reviews && reviews.length > 0) {
+//                 reviews.forEach(review => {
+//                     const reviewElement = document.createElement('div');
+//                     reviewElement.classList.add('review-item');
+//                     reviewElement.innerHTML = `
+//                         <div class="fs-1">${getStars(review.rating)}</div>
+//                         <p class="lead">${review.text}</p>
+//                         <div class="d-flex justify-content-start align-items-center pt-3">
+//                             <div>
+//                                 <span class="h6 fw-5">${review.author_name}</span><br>
+//                                 <small>${new Date(review.time * 1000).toLocaleDateString()}</small>
+//                             </div>
+//                         </div>
+//                     `;
+//                     reviewContainer.appendChild(reviewElement);
+//                 });
+//             } else {
+//                 reviewContainer.innerHTML = '<p>No reviews found.</p>';
+//             }
+//         })
+//         .catch(error => {
+//             console.error(error);
+//             reviewContainer.innerHTML = '<p>Error fetching reviews.</p>';
+//         });
+// }
 
 // Helper function to display stars based on the rating
-function getStars(rating) {
-    const fullStars = Math.floor(rating);
-    const halfStars = (rating % 1) >= 0.5 ? 1 : 0;
-    const emptyStars = 5 - fullStars - halfStars;
+// function getStars(rating) {
+//     const fullStars = Math.floor(rating);
+//     const halfStars = (rating % 1) >= 0.5 ? 1 : 0;
+//     const emptyStars = 5 - fullStars - halfStars;
 
-    let stars = '';
-    for (let i = 0; i < fullStars; i++) {
-        stars += '★'; // Full star
-    }
-    for (let i = 0; i < halfStars; i++) {
-        stars += '☆'; // Half star
-    }
-    for (let i = 0; i < emptyStars; i++) {
-        stars += '☆'; // Empty star
-    }
+//     let stars = '';
+//     for (let i = 0; i < fullStars; i++) {
+//         stars += '★'; // Full star
+//     }
+//     for (let i = 0; i < halfStars; i++) {
+//         stars += '☆'; // Half star
+//     }
+//     for (let i = 0; i < emptyStars; i++) {
+//         stars += '☆'; // Empty star
+//     }
 
-    return stars;
-}
+//     return stars;
+// }
 
             // Call the function to fetch reviews when the page loads
-            window.onload = function () {
-                fetchGoogleReviews();
-            };
+            // window.onload = function () {
+            //     fetchGoogleReviews();
+            // };
     </script>
     <script>
         
