@@ -81,7 +81,7 @@
                     <img src="img/webp/abstract9.webp"     width= "81%"  alt="abstract image" class="img-fluid position-relative rounded-5 shadow aos-init aos-animate" data-aos="fade-up">
 
                 </div>
-                <div class="col-12 col-lg-5" id="safari_div"  data-aos="fade-left">
+                <!-- <div class="col-12 col-lg-5" id="safari_div"  data-aos="fade-left">
                     <div id='dropdowntitle' class='dropdowntitle'> Destination</div>
                     <div class="custom-select">
                         <select class="form_field">
@@ -127,11 +127,11 @@
                             </svg>
                         </a>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-12 col-lg-5" id="safari_div"  data-aos="fade-left">
                             <h2 class="confirmation-title">Comming Soon!</h2>
                             <p class="confirmation-text">
-                            This feature is currently under development. Please stay tuned for updates. We appreciate your patience.
+                            This feature is currently under development. Please stay tuned for updates. We appreciate your patience.To book Safari Please contact our Whatsapp (+94774373545) for now.
                             </p>
                             <div class="confirmation-btn">
                                 <a href="/" class="btn btn-xl btn-light select-book">Home</a>

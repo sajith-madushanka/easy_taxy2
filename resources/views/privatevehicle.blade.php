@@ -192,6 +192,8 @@
     <script>
         $("#telinput").intlTelInput({
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/js/utils.js",
+            initialCountry: "lk", 
+            nationalMode: true, 
         });
         let scrollpos = window.scrollY
         const header = document.querySelector(".navbar")

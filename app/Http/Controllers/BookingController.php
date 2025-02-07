@@ -253,7 +253,7 @@ class BookingController extends Controller
     public function privateDestinations(Request $request)
     {
         try {
-            $destinations = PrivatePrice::where('pickup', request()->pickup)->get(['id', 'destination']);
+            $destinations = PrivatePrice::where('pickup', request()->pickup)->distinct()->get('destination');
     
             $optionsDestination = '<option value="" disabled selected>Select the destination</option>';
             foreach ($destinations as $destination) {
