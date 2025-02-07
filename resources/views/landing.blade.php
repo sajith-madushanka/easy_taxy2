@@ -79,12 +79,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-5" href="content.html" aria-label="A sample content page">
+                    <a class="nav-link fs-5" href="#services" aria-label="A sample content page">
                         Services
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-5" href="system.html" aria-label="A system message page">
+                    <a class="nav-link fs-5" href="#about_us" aria-label="A system message page">
                         About Us
                     </a>
                 </li>
@@ -160,7 +160,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-dark">
+        <div class="bg-dark" id="services">
             <div class="container px-vw-6 py-vh-5">
                 <div class="row d-flex align-items-center">
                     <div class="col-12 col-lg-7 text-lg-end" data-aos="fade-right">
@@ -445,7 +445,7 @@
         <div id="reviews-container"></div>
     </main>
     <hr class="ft_hide" style="color:#FC8E01;height: 3px;background-color: #FC8E01;">
-    <footer class="bg-black border-top border-dark ft_hide">
+    <footer id="about_us" class="bg-black border-top border-dark ft_hide">
         <div class="container py-vh-4 text-secondary fw-lighter">
             <div class="row">
                 <div class="col-12 col-lg-5 py-4 text-center text-lg-start">

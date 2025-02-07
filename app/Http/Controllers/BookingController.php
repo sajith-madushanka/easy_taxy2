@@ -9,6 +9,7 @@ use App\Models\AvailableSeats;
 
 
 use App\Models\PrivatePrice;
+use App\Models\PrivateBook;
 
 use Carbon\Carbon;
 
@@ -173,10 +174,18 @@ class BookingController extends Controller
     {
         // Prepare the message content
         $seats = implode(", ", $selectedSeats);
-        $message = "Your booking is confirmed! Seats: $seats on $date.";
+        $message = "Your booking is confirmed for mini bus seats: $seats on $date. Our office will contact you briefly on WhatsApp by this number, +94774373545. With payment information.";
         $phone = '94' . substr($phone, 1);
         // Send the SMS using notify.lk API
         $this->sendSMS($phone, $message);
+
+        $adminPhone = "0774373545"; 
+
+        $adminMessage = "New booking notification: $message"; 
+        $adminPhone = '94' . substr($adminPhone, 1); 
+
+        // Send SMS to the admin
+        $this->sendSMS($adminPhone, $adminMessage);
     }
 
     function sendSMS($phone, $message) {
@@ -248,7 +257,7 @@ class BookingController extends Controller
     
             $optionsDestination = '<option value="" disabled selected>Select the destination</option>';
             foreach ($destinations as $destination) {
-                $optionsDestination .= '<option value="' . $destination->id . '">' . $destination->destination . '</option>';
+                $optionsDestination .= '<option value="' . $destination->destination . '">' . $destination->destination . '</option>';
             }
     
             return response()->json([
@@ -267,12 +276,13 @@ class BookingController extends Controller
         try {
 
             $pickup = request()->pickup;
+            $type = request()->type;
             $destination = request()->destination;
             $return_trip = request()->return_trip;
 
-            $price = PrivatePrice::select('amount','return_trip')->where('id', $destination)->where('pickup', $pickup)->first();
+            $price = PrivatePrice::select('amount','return_trip')->where('type', $type)->where('destination', $destination)->where('pickup', $pickup)->first();
             $privateprice = $price->amount;
-            if($return_trip == true){
+            if($return_trip == 'true'){
                 $privateprice += $price->return_trip;
             }
 
@@ -285,6 +295,75 @@ class BookingController extends Controller
                 'message' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function privateBook(Request $request)
+    {
+        try {
+
+            $pickup = request()->pickup;
+            $type = request()->type;
+            $destination = request()->destination;
+            $return_trip = request()->return_trip;
+            $date = request()->date;
+            $time = request()->time;
+            $name = request()->name;
+            $phone = request()->telinput;
+            $note = request()->note;
+
+
+            $dataQuery = PrivatePrice::query();
+            $privatePrices = $dataQuery->select('id','amount','return_trip')->where('type', $type)->where('destination', $destination)->where('pickup', $pickup)->first();
+            $privateprice = $privatePrices->amount;
+            if($return_trip == 'true'){
+                $privateprice += $privatePrices->return_trip;
+            }
+
+            $minibusBooking = PrivateBook::create([
+                'private_price' => $privatePrices->id,
+                'return_trip' => $return_trip, 
+                'date' => $date,
+                'time' => $time,
+                'name' => $name,
+                'phone' => $phone,
+                'note' => $note,
+                'price' => $privateprice
+            ]);
+
+
+            $this->sendBookingConfirmation2($phone, $type, $date, $time);
+
+            // Return a success response or redirect, depending on your needs
+            return response()->json([
+                'message' => 'Booking successfully created and confirmation sent!',
+                'data' => $minibusBooking
+            ]);
+
+
+
+
+        } catch (\Exception $e) {
+            // Handle exceptions
+            return response()->json([
+                'error' => 'Error fetching data.',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    private function sendBookingConfirmation2($phone, $vehicleType, $date, $time)
+    {
+        $message = "Your booking is confirmed for a $vehicleType on $date at $time. Our office will contact you briefly on WhatsApp by this number, +94774373545. With payment information.";
+        $phone = '94' . substr($phone, 1);
+        $this->sendSMS($phone, $message);
+
+        $adminPhone = "0774373545"; 
+
+        $adminMessage = "New booking notification: $message"; 
+        $adminPhone = '94' . substr($adminPhone, 1); 
+
+        // Send SMS to the admin
+        $this->sendSMS($adminPhone, $adminMessage);
     }
 
     

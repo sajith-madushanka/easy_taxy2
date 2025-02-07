@@ -115,6 +115,14 @@
                             <option>Enter Destinaton</option>
                         </select>
                     </div>
+                    <div id='dropdowntitle' class='dropdowntitle' > Type</div>
+                    <div class="custom-select">
+                        <select class="form_field" id="type">
+                            <option value="car">Car (Max 3 passengers)</option>
+                            <option value="van">Van (Max 7 passengers)</option>
+                            <option value="commuter">Commuter (Max 10 passengers)</option>
+                        </select>
+                    </div>
                     <div id='dropdowntitle' class='dropdowntitle'> Date</div>
                     <input  class="form_field" type="date"  id="date">
                        
@@ -128,6 +136,7 @@
                         <input class="form-check-input" id="return" style="padding: 7px" type="checkbox" >
                         <div id='dropdowntitle' class='dropdowntitle' style="padding: 7px"> No</div>
                     </div>
+                    <div id="error-message" style="display: none; color: red;"></div>
 
                     <div class="price-box" id="price_div" style=" display: none;">
                         <h2 class="price-2" id="price" data-aos="zoom-in-left"></h2>
@@ -143,8 +152,8 @@
                     </div>
                 </div>
                 <div class="col-12 col-lg-5" id="privatebook" data-aos="fade-left" style=" display: none;">
-                    <div id='dropdowntitle' class='dropdowntitle'>Full Name</div>
-                    <input  class="form_field"  type="text" placeholder="Enter Name" >
+                    <div class='dropdowntitle'>Full Name</div>
+                    <input id="name" class="form_field"  type="text" placeholder="Enter Name" >
                        
                     </input>
                     <div id='dropdowntitle' class='dropdowntitle'> Mobile Number in Use </div>
@@ -156,14 +165,14 @@
                    
   
                     <div id='dropdowntitle' class='dropdowntitle'>Note</div>
-                    <input   class="form_field" type="text" placeholder="Enter Note" >
+                    <input  id="note" class="form_field" type="text" placeholder="Enter Note" >
                        
                     </input>
-                   
+                    <div id="error-message2" style="display: none; color: red;"></div>
                     
                     
                     <div class="price-box">
-                        <h2 class="price-2" data-aos="zoom-in-left"></h2>
+                        <h2 class="price-2" id="price_2" data-aos="zoom-in-left"></h2>
                     </div>
                     <div class="price-box">
                         <a onclick=" Book()"   class="btn btn-xl btn-light select-book">Proceed
@@ -273,10 +282,23 @@
         });
 
         document.getElementById('destination').addEventListener('change', function() {
-            const destination = this.value;
+
+            updatePrice();
             
-            if (destination) {
-                $.ajax({
+        });
+
+        document.getElementById('type').addEventListener('change', function() {
+
+            updatePrice();
+
+        });
+
+        document.getElementById('return').addEventListener('change', function() {
+            updatePrice();
+        });
+
+        function updatePrice() {
+            $.ajax({
                     url: '{{ url("private/get_price") }}',
                     type: 'POST',
                     headers: {
@@ -284,7 +306,8 @@
                     },
                     data: {
                         pickup:$('#pickup').val(),
-                        destination: destination,
+                        type: $('#type').val(),
+                        destination: $('#destination').val(),
                         return_trip:document.getElementById('return').checked
 
                     },
@@ -292,20 +315,143 @@
 
                     success: function(response) {
                         $('#price_div').show();
-                        $('#price').text(response.price + "LKR");
-                        $('#price_2').text(response.price + "LKR");
+                        $('#price').text(parseFloat(response.price).toFixed(2) + "LKR");
+                        $('#price_2').text(parseFloat(response.price).toFixed(2) + "LKR");
                         $('#book_now').show();
 
                     }
                 });
-            }
-        });
+        }
 
         function privateBook() {
+
+            var pickup = $('#pickup').val();
+            var destination = $('#destination').val();
+            var type = $('#type').val();
+            var date = $('#date').val();
+            var time = $('#time').val();
+            var returnTrip = $('#return').prop('checked');
+
+            var errorMessage = $('#error-message');
+            errorMessage.hide();
+
+            if (pickup === "Select the pickup location" || pickup === "") {
+                errorMessage.text("Please select a valid pick-up location.");
+                errorMessage.show();
+                return; // Exit function if there is an error
+            }
+
+            if (destination === "Select the destination" || destination === "") {
+                errorMessage.text("Please select a valid destination.");
+                errorMessage.show();
+                return;
+            }
+
+            if (type === "") {
+                errorMessage.text("Please select a vehicle type.");
+                errorMessage.show();
+                return;
+            }
+
+            if (date === "") {
+                errorMessage.text("Please select a valid date.");
+                errorMessage.show();
+                return;
+            }
+
+            if (time === "") {
+                errorMessage.text("Please select a valid time.");
+                errorMessage.show();
+                return;
+            }
+
+           
 
             $('#private_div').fadeOut('slow');
             $('#private_div').hide();
             $('#privatebook').fadeIn('slow');
+        }
+
+        function Book() {
+
+            var pickup = $('#pickup').val();
+            var destination = $('#destination').val();
+            var type = $('#type').val();
+            var date = $('#date').val();
+            var time = $('#time').val();
+            var returnTrip = $('#return').prop('checked');
+            var name = $('#name').val();
+            var telinput = $('#telinput').val();
+
+            var errorMessage = $('#error-message2');
+            errorMessage.hide();
+
+            if (name === "" || name === null) {
+                errorMessage.text("Please Enter The Name.");
+                errorMessage.show();
+                return; // Exit function if there is an error
+            }
+
+            if (telinput === "" || telinput === null) {
+                errorMessage.text("Please Enter The Phone Number.");
+                errorMessage.show();
+                return;
+            }
+            if (pickup === "Select the pickup location" || pickup === "") {
+                errorMessage.text("There is an issue with your data. Please Refresh the Page.");
+                errorMessage.show();
+                return; // Exit function if there is an error
+            }
+
+            if (destination === "Select the destination" || destination === "") {
+                errorMessage.text("There is an issue with your data. Please Refresh the Page.");
+                errorMessage.show();
+                return;
+            }
+
+            if (type === "") {
+                errorMessage.text("There is an issue with your data. Please Refresh the Page.");
+                errorMessage.show();
+                return;
+            }
+
+            if (date === "") {
+                errorMessage.text("There is an issue with your data. Please Refresh the Page.");
+                errorMessage.show();
+                return;
+            }
+
+            if (time === "") {
+                errorMessage.text("There is an issue with your data. Please Refresh the Page.");
+                errorMessage.show();
+                return;
+            }
+
+            $.ajax({
+                url: '{{ url("private/book") }}',
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    pickup:$('#pickup').val(),
+                    type: $('#type').val(),
+                    destination: $('#destination').val(),
+                    return_trip:document.getElementById('return').checked,
+                    date:$('#date').val(),
+                    time:$('#time').val(),
+                    name:$('#name').val(),
+                    telinput:$('#telinput').val(),
+                    note:$('#note').val()
+                },
+            
+                dataType: 'json',
+
+                success: function(response) {
+                    $('#privatebook').hide();
+                    $('#booking-confirmation').show();
+                }
+            });
         }
 
       

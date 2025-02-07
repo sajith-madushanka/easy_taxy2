@@ -117,10 +117,11 @@
                             <input id="seat_name" class="form_field" style="border: none;" type="text" readonly>
                             <img src="img/webp/selected.webp" style="height: 21px;float: right; margin: 10px;"></img>
                         </div>
-
+                        <div id="error-message" style="display: none; color: red;"></div>
                         <div class="price-box" id="price_div"  style=" display: none;">
                             <h2 class=" price-2"  id="price" data-aos="zoom-in-left"></h2>
                         </div>
+
                         <div class="price-box"   id="book_now" style=" display: none;">
                             <a onclick=" minibusBook()" class="btn btn-xl btn-light select-book">Book Now
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -147,7 +148,7 @@
 
                         </input>
 
-
+                        <div id="error-message2" style="display: none; color: red;"></div>
 
                         <div class="price-box">
                             <h2 class="price-2" id="price_2" data-aos="zoom-in-left"></h2>
@@ -419,6 +420,38 @@
 
         function Book() {
 
+            var destination = $('#select_div').val();
+            var date = $('#date').val();
+            var name = $('#name').val();
+            var telinput = $('#telinput').val();
+
+
+            var errorMessage = $('#error-message2');
+            errorMessage.hide();
+            if (name === "" || name === null) {
+                errorMessage.text("Please Enter The Name.");
+                errorMessage.show();
+                return; // Exit function if there is an error
+            }
+
+            if (telinput === "" || telinput === null) {
+                errorMessage.text("Please Enter The Phone Number.");
+                errorMessage.show();
+                return;
+            }
+
+            if (destination === "Select the destination" || destination === "") {
+                errorMessage.text("There is an issue with your data. Please Refresh the Page.");
+                errorMessage.show();
+                return; // Exit function if there is an error
+            }
+
+            if (date === "") {
+                errorMessage.text("There is an issue with your data. Please Refresh the Page.");
+                errorMessage.show();
+                return;
+            }
+
                 $.ajax({
                     url: '{{ url("minibus/book") }}',
                     type: 'POST',
@@ -456,6 +489,30 @@
 
 
         function minibusBook() {
+
+            var destination = $('#select_div').val();
+            var date = $('#date').val();
+
+            var errorMessage = $('#error-message');
+            errorMessage.hide();
+
+            if (destination === "Select the destination" || destination === "") {
+                errorMessage.text("Please select a Destination.");
+                errorMessage.show();
+                return; // Exit function if there is an error
+            }
+
+            if (date === "") {
+                errorMessage.text("Please select a Date.");
+                errorMessage.show();
+                return;
+            }
+
+            // if (selected_seats.length === 0) {
+            //     errorMessage.text("Please select Seats.");
+            //     errorMessage.show();
+            //     return;
+            // }
 
             $('#seat_div').fadeOut('slow');
             $('#seat_div').hide();

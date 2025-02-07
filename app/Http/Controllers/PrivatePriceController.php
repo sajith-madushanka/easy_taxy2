@@ -39,6 +39,7 @@ class PrivatePriceController extends Controller
                                 <th>#</th>
                                 <th>Pickup</th>
                                 <th>Destination</th>
+                                <th>Type</th>
                                 <th>Ammount</th>
                                 <th>Return Trip</th>
                                 <th>Action</th>
@@ -51,10 +52,11 @@ class PrivatePriceController extends Controller
                 $table_data .= '<td>' . $row->id . '</td>';
                 $table_data .= '<td style="font-size: 13px">' . $row->pickup . '</td>';
                 $table_data .= '<td style="font-size: 13px">' . $row->destination . '</td>';
+                $table_data .= '<td style="font-size: 13px">' . $row->type . '</td>';
                 $table_data .= '<td style="font-size: 13px">' . $row->amount . '</td>';
                 $table_data .= '<td style="font-size: 13px">' . $row->return_trip . '</td>';
                 $table_data .= '<td>
-                                    <button style="width:66px;height:30px" onclick="edit_data(' . $row->id . ',\''. $row->pickup . '\',\''  . $row->destination . '\',\'' . $row->amount . '\',\'' . $row->return_trip . '\')" class="btn btn-info btn-sm btn-round">Edit</button>
+                                    <button style="width:66px;height:30px" onclick="edit_data(' . $row->id . ',\''. $row->pickup . '\',\''  . $row->destination . '\',\''  . $row->type . '\',\'' . $row->amount . '\',\'' . $row->return_trip . '\')" class="btn btn-info btn-sm btn-round">Edit</button>
                                     <button style="width:66px;height:30px" onclick="delete_data(' . $row->id . ')" class="btn btn-danger btn-sm btn-round">Delete</button>
                                 </td>';
                 $table_data .= '</tr>';
@@ -81,7 +83,8 @@ class PrivatePriceController extends Controller
             'pickup' => 'required|string|max:255',
             'destination' => 'required|string|max:255',
             'amount' => 'required|numeric',
-            'return_trip' => 'required|numeric'
+            'return_trip' => 'required|numeric',
+            'type' => 'required|string|max:255',
         ]);
         try {
             PrivatePrice::create($request->all());
@@ -128,7 +131,8 @@ class PrivatePriceController extends Controller
             'pickup' => 'required|string|max:255',
             'destination' => 'required|string|max:255',
             'amount' => 'required|numeric',
-            'return_trip' => 'required|numeric'
+            'return_trip' => 'required|numeric',
+            'type' => 'required|string|max:255',
         ]);
 
         try {

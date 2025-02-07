@@ -42,6 +42,7 @@ Route::get('/private-vehicle', [PageController::class, 'private'])->name('privat
 Route::get('private/pickups', [BookingController::class, 'privatePickup']);
 Route::post('private/destinations', [BookingController::class, 'privateDestinations']);
 Route::post('private/get_price', [BookingController::class, 'privateGetPrice']);
+Route::post('private/book', [BookingController::class, 'privateBook']);
 
 /*--------------------------------------------------------------------------
 | Safari Routes
