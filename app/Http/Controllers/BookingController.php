@@ -129,7 +129,7 @@ class BookingController extends Controller
             $this->updateAvailableSeats($date, $selected_seats);
 
             // Send a confirmation SMS
-            $this->sendBookingConfirmation($phone, $selected_seats, $date);
+            $this->sendBookingConfirmation($phone, $selected_seats, $date,$name);
 
             // Return a success response or redirect, depending on your needs
             return response()->json([
@@ -170,7 +170,7 @@ class BookingController extends Controller
         }
     }
 
-    private function sendBookingConfirmation($phone, $selectedSeats, $date)
+    private function sendBookingConfirmation($phone, $selectedSeats, $date,$name)
     {
         // Prepare the message content
         $seats = implode(", ", $selectedSeats);
@@ -181,7 +181,7 @@ class BookingController extends Controller
 
         $adminPhone = "0774373545"; 
 
-        $adminMessage = "New booking notification: $message"; 
+        $adminMessage = "$name($phone) booked a share taxi seat  $seats  for $date";
         $adminPhone = '94' . substr($adminPhone, 1); 
 
         // Send SMS to the admin
@@ -331,7 +331,7 @@ class BookingController extends Controller
             ]);
 
 
-            $this->sendBookingConfirmation2($phone, $type, $date, $time);
+            $this->sendBookingConfirmation2($phone, $type, $date, $time,$name);
 
             // Return a success response or redirect, depending on your needs
             return response()->json([
@@ -351,7 +351,7 @@ class BookingController extends Controller
         }
     }
 
-    private function sendBookingConfirmation2($phone, $vehicleType, $date, $time)
+    private function sendBookingConfirmation2($phone, $vehicleType, $date, $time,$name)
     {
         $message = "Your booking is confirmed for a $vehicleType on $date at $time. Our office will contact you briefly on WhatsApp by this number, +94774373545. With payment information.";
         $phone = '94' . substr($phone, 1);
@@ -359,7 +359,8 @@ class BookingController extends Controller
 
         $adminPhone = "0774373545"; 
 
-        $adminMessage = "New booking notification: $message"; 
+        // $adminMessage = "New booking notification: $message"; 
+        $adminMessage = "$name($phone) booked a private $vehicleType for $date";
         $adminPhone = '94' . substr($adminPhone, 1); 
 
         // Send SMS to the admin

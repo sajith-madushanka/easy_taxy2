@@ -74,7 +74,7 @@
 
     <main>
     <div class="bg-dark">
-        <div class="container px-vw-6 py-vh-5 container-2">
+        <div class="container px-vw-6 py-vh-5 container-2 container2_low">
             <div class="row d-flex align-items-center">
                 <div class="col-12 col-lg-7 text-lg-center" data-aos="fade-right">
 

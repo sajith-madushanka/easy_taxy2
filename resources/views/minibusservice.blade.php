@@ -230,6 +230,7 @@
         });
     </script>
     <script>
+         document.getElementById('date').value = new Date().toISOString().split('T')[0];
         $("#telinput").intlTelInput({
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/js/utils.js",
             initialCountry: "lk", 

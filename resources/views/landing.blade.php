@@ -206,7 +206,7 @@
                 <div class="row gx-5">
                     <div class="col-12 col-md-6">
                         <div class="card bg-transparent mb-5 " data-aos="zoom-in-up">
-                            <div class="bg-dark shadow rounded-5 p-0 padding_tp" style="background-image: url('img/webp/abstract3.webp');min-height: 458px;margin: 15%;background-size: cover;background-position: center;display:flex">
+                            <div class="bg-dark shadow rounded-5 p-0 padding_tp pop_container" style="background-image: url('img/webp/abstract3.webp');min-height: 458px;margin: 15%;background-size: cover;background-position: center;display:flex">
 
                                 <div class="p-5 card_overlay">
                                     <h2 class="fw-lighter">Safari Experience</h2>
@@ -217,7 +217,7 @@
                         </div>
 
                         <div class="card bg-transparent" data-aos="zoom-in-up">
-                            <div class="bg-dark shadow rounded-5 p-0 padding_tp" style="background-image: url('img/webp/abstract2.webp');min-height: 458px;margin: 15%;background-size: cover;background-position: center;display:flex">
+                            <div class="bg-dark shadow rounded-5 p-0 padding_tp pop_container" style="background-image: url('img/webp/abstract2.webp');min-height: 458px;margin: 15%;background-size: cover;background-position: center;display:flex">
 
                                 <div class="p-5 card_overlay">
                                     <h2 class="fw-lighter">Private Taxi Experience</h2>
@@ -233,7 +233,7 @@
                             <h2 class="display-4">There is a lot we do. Here is a small sneak peek </h2>
                         </div>
                         <div class="card bg-transparent mb-5 mt-5" data-aos="zoom-in-up">
-                            <div class="bg-dark shadow rounded-5 p-0 padding_tp" style="background-image: url('img/webp/abstract17.webp');min-height: 458px;margin: 15%;background-size: cover;background-position: center;display:flex">
+                            <div class="bg-dark shadow rounded-5 p-0 padding_tp pop_container" style="background-image: url('img/webp/abstract17.webp');min-height: 458px;margin: 15%;background-size: cover;background-position: center;display:flex">
 
                                 <div class="p-5 card_overlay">
                                     <h2 class="fw-lighter">Mini Bus Experience</h2>
@@ -244,7 +244,7 @@
                         </div>
 
                         <div class="card bg-transparent" data-aos="zoom-in-up">
-                            <div class="bg-dark shadow rounded-5 p-0 padding_tp" style="background-image: url('img/webp/abstract4.webp');min-height: 458px;margin: 15%;background-size: cover;background-position: center;display:flex">
+                            <div class="bg-dark shadow rounded-5 p-0 padding_tp pop_container" style="background-image: url('img/webp/abstract4.webp');min-height: 458px;margin: 15%;background-size: cover;background-position: center;display:flex">
 
                                 <div class="p-5 card_overlay">
                                     <h2 class="fw-lighter">Customer Care Experience</h2>

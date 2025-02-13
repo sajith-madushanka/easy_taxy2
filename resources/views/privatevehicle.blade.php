@@ -75,7 +75,7 @@
 
     <main>
     <div class="bg-dark">
-        <div class="container px-vw-6 py-vh-5">
+        <div class="container px-vw-6 py-vh-5 container2_low">
             <div class="row d-flex align-items-center">
                 <div class="col-12 col-lg-6 " data-aos="fade-right">
 
@@ -190,6 +190,7 @@
         });
     </script>
     <script>
+        document.getElementById('date').value = new Date().toISOString().split('T')[0];
         $("#telinput").intlTelInput({
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/js/utils.js",
             initialCountry: "lk", 
