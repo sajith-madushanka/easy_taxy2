@@ -127,7 +127,7 @@
 
                     <div class="col-12 col-lg-6">
                         <a href="minibus" class="link-container zoom-image">
-                            <img src="img/webp/abstract18.webp" width="2280" height="1732" alt="abstract image" class="img-fluid position-relative rounded-5 shadow " data-aos="fade-up">
+                            <img src="img/webp/minibus.webp" width="2280" height="1732" alt="abstract image" class="img-fluid position-relative rounded-5 shadow " data-aos="fade-up">
                             <div class="image-namem mt-2 text-center">
                                 <p class="text-muted">Minibus</p> 
                             </div>
@@ -138,7 +138,7 @@
 
                     <div class="col-12 col-md-6 col-lg-3">
                         <a href="private-vehicle" class="link-container zoom-image">
-                            <img src="img/webp/abstract6.webp" width="1116" height="1578" alt="abstract image" class="img-fluid position-relative rounded-5 shadow " data-aos="fade-up" data-aos-duration="2000">
+                            <img src="img/webp/private.webp" width="1116" height="1578" alt="abstract image" class="img-fluid position-relative rounded-5 shadow " data-aos="fade-up" data-aos-duration="2000">
                             <div class="image-namep mt-2 text-center">
                                 <p class="text-muted">Private Vehicle</p> 
                             </div>
@@ -149,7 +149,7 @@
 
                     <div class="col-12 col-md-6 col-lg-3">
                         <a href="safari" class="link-container zoom-image">
-                            <img src="img/webp/abstract9.webp" width="1116" height="848" alt="abstract image" class="img-fluid position-relative rounded-5 shadow " data-aos="fade-up" data-aos-duration="3000">
+                            <img src="img/webp/safari.webp" width="1116" height="848" alt="abstract image" class="img-fluid position-relative rounded-5 shadow " data-aos="fade-up" data-aos-duration="3000">
                             <div class="image-names mt-2 text-center">
                                 <p class="text-muted">Safari</p> 
                             </div>
@@ -169,28 +169,28 @@
                     </div>
                     <div class="col-12 col-lg-5" data-aos="fade-left">
                         <h3 class="pt-5">Mini Bus Service</h3>
-                        <p class="text-secondary">Daily bus service with a fixed route where you can book a seat if your next destination is on our route.<br>
-                            <a class="link-container">
-                                <div class="link-fancy link-fancy-light me-2" >Tell me more</div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                        <p class="text-secondary" ><span id="mini-bus-info">Daily bus service with a fixed route where you can book a seat if your next destination is on our route.<span><br>
+                            <a href="javascript:void(0);" class="link-container" > 
+                                <div class="link-fancy link-fancy-light me-2" id="mtogle" onclick="toggleInfo()" >Tell me more</div>
+                                <svg onclick="toggleInfo()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
                                 </svg>
                                 <a>
                         </p>
                         <h3 class="border-top border-secondary pt-5 mt-5">Private Vehicle</h3>
-                        <p class="text-secondary">A car or a van specifically for you to go wherever you need to go in Sri Lanka.<br>
+                        <p class="text-secondary"><span id="private-info">A car or a van specifically for you to go wherever you need to go in Sri Lanka.</span><br>
                             <a href="private-vehicle" class="link-container">
-                                <a href="#" class="link-fancy link-fancy-light me-2">Tell me more</a>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                                <a  class="link-fancy link-fancy-light me-2" id="ptogle" onclick="toggleInfo2()">Tell me more</a>
+                                <svg onclick="toggleInfo2()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
                                 </svg>
                             </a>
                         </p>
                         <h3 class="border-top border-secondary pt-5 mt-5">Safari</h3>
-                        <p class="text-secondary">A well organized safari to Yala or Udawalawa where you can enjoy wildlife hassle free.<br>
+                        <p class="text-secondary"><span id="safari-info">A well organized safari to Yala or Udawalawa where you can enjoy wildlife hassle free.</span><br>
                             <a href="safari" class="link-container">
-                                <a href="#" class="link-fancy link-fancy-light me-2">Tell me more</a>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                                <a class="link-fancy link-fancy-light me-2"  id="stogle" onclick="toggleInfo3()">Tell me more</a>
+                                <svg onclick="toggleInfo3()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
                                 </svg>
                             </a>
@@ -205,6 +205,10 @@
 
                 <div class="row gx-5">
                     <div class="col-12 col-md-6">
+                    <div class="p-5 pt-0 mt-5" data-aos="fade">
+                            <span class="h5 text-secondary fw-lighter">More into our services</span>
+                            <h2 class="display-4">There is a lot we do. Here is a small sneak peek </h2>
+                        </div>
                         <div class="card bg-transparent mb-5 " data-aos="zoom-in-up">
                             <div class="bg-dark shadow rounded-5 p-0 padding_tp pop_container" style="background-image: url('img/webp/abstract3.webp');min-height: 458px;margin: 15%;background-size: cover;background-position: center;display:flex">
 
@@ -228,10 +232,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
-                        <div class="p-5 pt-0 mt-5" data-aos="fade">
-                            <span class="h5 text-secondary fw-lighter">More into our services</span>
-                            <h2 class="display-4">There is a lot we do. Here is a small sneak peek </h2>
-                        </div>
+                        
                         <div class="card bg-transparent mb-5 mt-5" data-aos="zoom-in-up">
                             <div class="bg-dark shadow rounded-5 p-0 padding_tp pop_container" style="background-image: url('img/webp/abstract17.webp');min-height: 458px;margin: 15%;background-size: cover;background-position: center;display:flex">
 
@@ -277,8 +278,8 @@
 
             <div class="container bg-black px-vw-5 py-vh-3 rounded-5 shadow blck_c">
                 <div class="row d-flex align-items-center">
-                    <div class="col-1"></div>
-                    <div class="col-4 d-flex align-items-center bg-dark shadow rounded-5 p-0" data-aos="zoom-in-up">
+                    <div class="col-1 custom-col-1"></div>
+                    <div class="col-4 custom-col-4 d-flex align-items-center bg-dark shadow rounded-5 p-0" data-aos="zoom-in-up">
                         <div class="row d-flex justify-content-center " style="background: #202020;border-radius:29px">
                             {{-- <div class="col-12">
                                     <img src="img/webp/person103.webp" width="684" height="457"
@@ -291,7 +292,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-1"></div>
+                    <div class="col-1 custom-col-1" ></div>
                     <div class="col-5 offset-1">
                         <span class="h5 text-secondary fw-lighter">The numbers</span>
                         <h2 class="display-huge fw-bolder" data-aos="zoom-in-left">+4000</h2>
@@ -312,11 +313,15 @@
             </div>
 
         </div>
-        <div class="bg-dark py-vh-5">
+        <div class="bg-dark py-vh-5" id="reviews-container">
             <div class="container px-vw-5">
                 <div class="row d-flex gx-5 align-items-center">
                     <div class="col-12 col-lg-6" style="justify-content: center">
-                        <div class="rounded-5 bg-black p-5 shadow blck_c" data-aos="zoom-in-right" style=" max-width: 480px;">
+                        <div class="p-5 pt-0" data-aos="fade">
+                            <span class="h5 text-secondary fw-lighter">What others have to say about us</span>
+                            <h2 class="display-4"> Our Reviews </h2>
+                        </div>
+                        <div class="rounded-5 bg-black p-5 shadow blck_c blck_cd" data-aos="zoom-in-right" style=" max-width: 480px;">
                             <div class="fs-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
                                     <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
@@ -355,7 +360,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="rounded-5 bg-black p-5 shadow mt-5 blck_c" data-aos="zoom-in-right" style=" max-width: 480px;">
+                        <div class="rounded-5 bg-black p-5 shadow mt-5 blck_c blck_cd" data-aos="zoom-in-right" style=" max-width: 480px;">
                             <div class="fs-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
                                     <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
@@ -392,14 +397,87 @@
                                 </div>
                             </div>
                         </div>
+                       
 
                     </div>
                     <div class="col-12 col-lg-6">
-                        <div class="p-5 pt-0" data-aos="fade">
-                            <span class="h5 text-secondary fw-lighter">What others have to say about us</span>
-                            <h2 class="display-4"> Our Reviews </h2>
+                    <div class="rounded-5 bg-black p-5 shadow mt-5 blck_c blck_cd" data-aos="zoom-in-right" style=" max-width: 480px;">
+                            <div class="fs-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-half" viewBox="0 0 16 16">
+                                    <path d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" />
+                                </svg>
+
+                            </div>
+                            <p class="text-secondary lead">"Lorem ipsum dolor sit amet, consectetur tempor incididunt
+                                ut labore et dolore magna aliqua. Ut enim ad minim veniam. quis nostrud exercitation
+                                ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
+                            <div class="d-flex justify-content-start align-items-center border-secondary pt-3">
+                                <div>
+                                    <span class="h6 fw-5">Jane </span><br>
+                                    <small class="text-secondary">Doemunsky</small>
+                                </div>
+                            </div>
                         </div>
-                        <div class="rounded-5 bg-black p-5 shadow mt-5 blck_c" data-aos="zoom-in-left" style=" max-width: 480px;">
+                        
+                        <div class="rounded-5 bg-black p-5 shadow mt-5 blck_c blck_cd" data-aos="zoom-in-left" style=" max-width: 480px;">
+                            <div class="fs-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+
+
+                            </div>
+                            <p class="lead">"Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                laboris nisi ut aliquip ex ea commodo consequat."</p>
+                            <div class="d-flex justify-content-start align-items-center  pt-3">
+                                <div>
+                                    <span class="h6 fw-5">Jane </span><br>
+                                    <small>Doemunsky</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rounded-5 bg-black p-5 shadow mt-5 blck_c blck_cd" data-aos="zoom-in-left" style=" max-width: 480px;">
                             <div class="fs-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
                                     <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
@@ -442,7 +520,8 @@
             </div>
 
         </div>
-        <!-- <div id="reviews-container"></div> -->
+            
+            
     </main>
     <hr class="ft_hide" style="color:#FC8E01;height: 3px;background-color: #FC8E01;">
     <footer id="about_us" class="bg-black border-top border-dark ft_hide">
@@ -587,69 +666,239 @@
 function closeModal() {
   document.getElementById('infoModal').style.display = 'none';
 }
-        // const apiKey = 'AIzaSyBqiMW60sG9pVY-eH_Qf2tjB0cd_KXYnOU';
-        //     // Google Place ID for your business
-        //     const placeId = 'ChIJH-opw7Zl5DoRBeKvRmnbNok';
-        //     const reviewContainer = document.getElementById('reviews-container');
+        const apiKey = 'AIzaSyBqiMW60sG9pVY-eH_Qf2tjB0cd_KXYnOU';
+            // Google Place ID for your business
+            const placeId = 'ChIJH-opw7Zl5DoRBeKvRmnbNok';
+            var reviewContainer = document.getElementById('reviews-container');
 
         // const reviewContainer = document.getElementById('reviews-container');
 
-// function fetchGoogleReviews() {
-//     fetch( '{{ url("get-reviews") }}')  // Call your Laravel endpoint
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log(data);  // Log the full response data
-//             const reviews = data.result.reviews;
-//             if (reviews && reviews.length > 0) {
-//                 reviews.forEach(review => {
-//                     const reviewElement = document.createElement('div');
-//                     reviewElement.classList.add('review-item');
-//                     reviewElement.innerHTML = `
-//                         <div class="fs-1">${getStars(review.rating)}</div>
-//                         <p class="lead">${review.text}</p>
-//                         <div class="d-flex justify-content-start align-items-center pt-3">
-//                             <div>
-//                                 <span class="h6 fw-5">${review.author_name}</span><br>
-//                                 <small>${new Date(review.time * 1000).toLocaleDateString()}</small>
-//                             </div>
-//                         </div>
-//                     `;
-//                     reviewContainer.appendChild(reviewElement);
-//                 });
-//             } else {
-//                 reviewContainer.innerHTML = '<p>No reviews found.</p>';
-//             }
-//         })
-//         .catch(error => {
-//             console.error(error);
-//             reviewContainer.innerHTML = '<p>Error fetching reviews.</p>';
-//         });
-// }
 
-// Helper function to display stars based on the rating
-// function getStars(rating) {
-//     const fullStars = Math.floor(rating);
-//     const halfStars = (rating % 1) >= 0.5 ? 1 : 0;
-//     const emptyStars = 5 - fullStars - halfStars;
+        function fetchGoogleReviews() {
+    const reviewsContainer = document.getElementById('reviews-container');
 
-//     let stars = '';
-//     for (let i = 0; i < fullStars; i++) {
-//         stars += '★'; // Full star
-//     }
-//     for (let i = 0; i < halfStars; i++) {
-//         stars += '☆'; // Half star
-//     }
-//     for (let i = 0; i < emptyStars; i++) {
-//         stars += '☆'; // Empty star
-//     }
+    fetch('{{ url("get-reviews") }}')  // Fetch reviews from your backend
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);  // Log the full response data
 
-//     return stars;
-// }
+            const reviews = data.result.reviews;  // Assuming your response data structure has 'result.reviews'
+            
+            if (reviews && reviews.length > 0) {
+                // Get all the review cards
+                const reviewCards = document.querySelectorAll('.blck_cd');
+                
+                // Loop through the reviews and update each card accordingly
+                reviews.forEach((review, index) => {
+                    const reviewCard = reviewCards[index];
+                    console.log(reviewCard);
+                    
+                    // Build the star rating dynamically
+                    const stars = getStars(review.rating);
+                    const truncatedText = truncateText(review.text, 300);
 
-            // Call the function to fetch reviews when the page loads
-            // window.onload = function () {
-            //     fetchGoogleReviews();
-            // };
+                    // Find the appropriate review card and update its inner content
+                    if (reviewCard) {
+                        reviewCard.querySelector('.fs-1').innerHTML = stars;
+                        reviewCard.querySelector('.lead').textContent = truncatedText;
+                        reviewCard.querySelector('.h6').textContent = review.author_name;
+                        reviewCard.querySelector('small').textContent = new Date(review.time * 1000).toLocaleDateString();
+                    }
+                });
+            } else {
+                reviewsContainer.innerHTML = '<p>No reviews found.</p>';
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            reviewsContainer.innerHTML = '<p>Error fetching reviews.</p>';
+        });
+}
+
+function truncateText(text, maxLength) {
+    if (text.length > maxLength) {
+        return text.slice(0, maxLength) + '...';  // Truncate and add ellipsis
+    }
+    return text;  // Return original text if it's within the limit
+}
+function getStars(rating) {
+    const fullStars = Math.floor(rating);
+    const halfStars = (rating % 1) >= 0.5 ? 1 : 0;
+    const emptyStars = 5 - fullStars - halfStars;
+
+    let stars = '';
+    for (let i = 0; i < fullStars; i++) {
+        stars += '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /></svg>';
+    }
+    for (let i = 0; i < halfStars; i++) {
+        stars += '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-half" viewBox="0 0 16 16"><path d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" /></svg>';
+    }
+    for (let i = 0; i < emptyStars; i++) {
+        stars += '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /></svg>';
+    }
+
+    return stars;
+}
+
+function toggleInfo() {
+    var miniBusInfo = document.getElementById('mini-bus-info');
+    var toggleButton = document.getElementById('mtogle');
+
+    // Check if we are currently in the "Tell me more" state
+    if (toggleButton.innerText === 'Tell me more') {
+        // Update the content to the expanded information
+        miniBusInfo.innerHTML = `
+            Daily 10 AM Mini Bus Service with a fixed route where you can book a seat if your next destination is on our route.
+            <br>
+            Travel comfortably in our 7-seater air-conditioned mini bus, designed for tourists looking for a hassle-free and scenic journey. Our fixed route covers some of Sri Lanka’s most beautiful destinations:
+            <br>
+            📍 Udawalawa <br>
+            📍 Thissamaharama <br>
+            📍 Tangalle <br>
+            📍 Dickwella <br>
+            📍 Hiriketiya <br>
+            📍 Matara <br>
+            📍 Mirissa <br>
+            📍 Weligama <br>
+            📍 Unawatuna <br>
+            📍 Galle <br>
+            <br>
+            Convenient Pickup & Drop-off <br>
+            Pickup: Start your journey from our office in Ella. <br>
+            Drop-off: We take you directly to your hotel at any destination along our route. <br>
+            <br>
+            Why Choose Our Service? <br>
+            ✔ Comfortable & Air-Conditioned – Travel in a relaxing 7-seater mini bus. <br>
+            ✔ Reliable & Punctual – Departs daily at 10 AM from Ella. <br>
+            ✔ Tourist-Friendly – Designed for travelers seeking a smooth and stress-free ride. <br>
+            ✔ Easy Booking – Reserve your seat and contact via WhatsApp, phone, or visit our office. <br>
+            <br>
+            Enjoy a seamless journey to your next destination—Book your seat today! 🚐✨
+            <br><br>
+        `;
+        
+        // Change button text to "Tell me less"
+        toggleButton.innerHTML = 'Tell me less';
+    } else {
+        // Revert to the original text
+        miniBusInfo.innerHTML = `
+            Daily bus service with a fixed route where you can book a seat if your next destination is on our route.
+            <br>
+        `;
+        toggleButton.innerHTML = 'Tell me more';
+    }
+}
+
+function toggleInfo2() {
+    var miniBusInfo = document.getElementById('private-info');
+    var toggleButton = document.getElementById('ptogle');
+
+    // Check if we are currently in the "Tell me more" state
+    if (toggleButton.innerText === 'Tell me more') {
+        // Update the content to the expanded information
+        miniBusInfo.innerHTML = `
+            Private Vehicle Service – Travel Anywhere in Sri Lanka
+            <br>
+            A car or a van specifically for you to go wherever you need to go in Sri Lanka. Enjoy the freedom to travel at your own pace with a comfortable, air-conditioned private vehicle and an experienced driver. Whether you're heading to your next destination, exploring hidden gems, or planning a multi-day tour, we’ve got you covered!
+            <br><br>
+            Why Choose Our Private Vehicle Service?
+            <br>
+            ✅ Flexible & Personalized – Travel on your schedule, to any destination.
+            <br>
+            ✅ Comfort & Privacy – Enjoy a private car or van with air conditioning.
+            <br>
+            ✅ Door-to-Door Service – Convenient pickup and drop-off anywhere in Sri Lanka.
+            <br>
+            ✅ Perfect for Tourists – No stress, no waiting—just a smooth, hassle-free journey.
+            <br>
+            ✅ Experienced Drivers – Friendly, professional drivers with local knowledge.
+            <br><br>
+            How to Book?
+            <br>
+            Book Here! and Contact us via WhatsApp, phone call, or visit our office in Ella.
+            <br><br>
+            📍 Available From: Anywhere in Sri Lanka
+            <br><br>
+            Explore Sri Lanka your way—Book your private car or van today! 🚗✨
+            <br><br>
+        `;
+        
+        // Change button text to "Tell me less"
+        toggleButton.innerHTML = 'Tell me less';
+    } else {
+        // Revert to the original text
+        miniBusInfo.innerHTML = `
+        A car or a van specifically for you to go wherever you need to go in Sri Lanka.
+            <br>
+        `;
+        toggleButton.innerHTML = 'Tell me more';
+    }
+}
+
+function toggleInfo3() {
+    var miniBusInfo = document.getElementById('safari-info');
+    var toggleButton = document.getElementById('stogle');
+
+    // Check if we are currently in the "Tell me more" state
+    if (toggleButton.innerText === 'Tell me more') {
+        // Update the content to the expanded information
+        miniBusInfo.innerHTML = `
+    Safari Tours – Experience Sri Lanka’s Wildlife
+    <br>
+    A well-organized safari to Yala or Udawalawa, where you can enjoy wildlife hassle-free. Explore the breathtaking landscapes of Sri Lanka’s top national parks and witness elephants, leopards, crocodiles, and exotic birds in their natural habitat. Travel in a comfortable 4x4 jeep with an experienced guide for the best wildlife spotting experience.
+    <br><br>
+    Why Choose Our Safari Tours?
+    <br>
+    ✅ Hassle-Free & Well-Organized – We handle all arrangements for a smooth experience.
+    <br>
+    ✅ Comfortable 4x4 Jeeps – Designed for the best wildlife viewing and photography.
+    <br>
+    ✅ Expert Guides & Drivers – Knowledgeable about the best spots for animal sightings.
+    <br>
+    ✅ Morning & Evening Safaris – Choose the best time for wildlife encounters.
+    <br>
+    ✅ Convenient Pickup & Drop-off – From Ella or your hotel.
+    <br><br>
+    Safari Destinations:
+    <br>
+    🦁 Yala National Park – Home to leopards, elephants, sloth bears, and diverse wildlife.
+    <br>
+    🐘 Udawalawa National Park – Famous for large herds of elephants and scenic landscapes.
+    <br><br>
+    How to Book?
+    <br>
+    Secure your safari experience today! and Contact us via WhatsApp, phone call, or visit our office in Ella.
+    <br><br>
+    📍 Pickup Location: From Ella or your hotel
+    <br>
+    📞 Contact Us: +94 77 437 3545
+    <br><br>
+    Embark on an unforgettable wildlife adventure—Book your safari now! 🦓🌿🚙
+    <br><br>
+            <br><br>
+        `;
+        
+        // Change button text to "Tell me less"
+        toggleButton.innerHTML = 'Tell me less';
+    } else {
+        // Revert to the original text
+        miniBusInfo.innerHTML = `
+        A well organized safari to Yala or Udawalawa where you can enjoy wildlife hassle free.
+            <br>
+        `;
+        toggleButton.innerHTML = 'Tell me more';
+    }
+}
+
+
+
+
+
+
+
+            window.onload = function () {
+                fetchGoogleReviews();
+            };
     </script>
     <script>
         

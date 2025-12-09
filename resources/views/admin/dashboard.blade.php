@@ -123,55 +123,48 @@
                     </nav>
                     <div class="pcoded-content">
             <div class="pcoded-inner-content">
-                <div class="main-body">
-                    <div class="page-wrapper">
+                
+                <div class="container">
+    <label for="booking-date">Select Date:</label>
+    <input type="date" id="booking-date">
 
-                        <!-- Page body start -->
-                        <div class="page-body">
-                        <div class="card">
-                                        <div class="card-header">
-                                            <h5>Tickets table</h5>
-                                            <div class="card-header-right">    <ul class="list-unstyled card-option" style="width: 180px;">        <li><i class="icofont icofont-simple-left icofont-simple-right"></i></li>        <li><i class="icofont icofont-maximize full-card"></i></li>        <li><i class="icofont icofont-minus minimize-card"></i></li>        <li><i class="icofont icofont-refresh reload-card"></i></li>        <li><i class="icofont icofont-error close-card"></i></li>    </ul></div>
-                                        </div>
-                                        <div class="card-block table-border-style">
-                                            <div class="table-responsive">
-                                                <table class="table table-inverse">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>First Name</th>
-                                                            <th>Last Name</th>
-                                                            <th>Username</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">1</th>
-                                                            <td>Mark</td>
-                                                            <td>Otto</td>
-                                                            <td>@mdo</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">2</th>
-                                                            <td>Jacob</td>
-                                                            <td>Thornton</td>
-                                                            <td>@fat</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">3</th>
-                                                            <td>Larry</td>
-                                                            <td>the Bird</td>
-                                                            <td>@twitter</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                        </div>
-                        <!-- Page body end -->
-                    </div>
-                </div>
+    <div class="card">
+        <div class="card-header"><h5>Minibus Bookings</h5></div>
+        <div class="card-block table-border-style">
+            <table class="table">
+                <thead>
+                    <tr><th>#</th><th>Name</th><th>Date</th><th>Destination</th><th>Phone</th><th>Seats</th><th>Note</th><th>Price</th></tr>
+                </thead>
+                <tbody id="minibus-table"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header"><h5>Private Vehicle Bookings</h5></div>
+        <div class="card-block table-border-style">
+            <table class="table">
+                <thead>
+                    <tr><th>#</th><th>Name</th><th>Pickup</th><th>Destination</th><th>Date</th><th>Time</th><th>Type</th><th>Phone</th><th>Return Trip</th><th>note</th><th>Price</th></tr>
+                </thead>
+                <tbody id="private-table"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header"><h5>Safari Bookings</h5></div>
+        <div class="card-block table-border-style">
+            <table class="table">
+                <thead>
+                    <tr><th>#</th><th>Name</th><th>Phone</th><th>Seats</th><th>Price</th></tr>
+                </thead>
+                <tbody id="safari-table"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
                 <!-- Main-body end -->
 
                 <div id="styleSelector">
@@ -339,496 +332,42 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script>
-    var $window = $(window);
-    var start_date = '';
-    var end_date = '';
-    var page = 1;
-    var b_page = 1;
-    var per_page = 15;
-    var pair_del = "";
-    var data_del = "";
-    var battery_del = "";
-    var export_ids = [];
-    var shift_id = '';
-    var nav = $('.fixed-button');
-    $window.scroll(function() {
-        if ($window.scrollTop() >= 200) {
-            nav.addClass('active');
-        } else {
-            nav.removeClass('active');
-        }
+    document.getElementById("booking-date").addEventListener("change", function () {
+    let selectedDate = this.value;
+    fetch(`/bookings?date=${selectedDate}`)
+        .then(response => response.json())
+        .then(data => {
+            updateTable("minibus-table", data.minibus, ["name","date", "price_row.destination", "phone", "seats","note", "price"]);
+            updateTable("private-table", data.private, ["name", "price_row.pickup","price_row.destination","date","time","price_row.type","phone", "return_trip","note", "price"]);
+            updateTable("safari-table", data.safari, ["name", "phone", "seats", "price"]);
+        })
+        .catch(error => console.error("Error fetching data:", error));
+});
+
+function updateTable(tableId, data, fields) {
+    let tbody = document.getElementById(tableId);
+    tbody.innerHTML = "";
+    data.forEach((item, index) => {
+        let row = `<tr><td>${index + 1}</td>` + 
+                  fields.map(field => {
+                      // Check if the field is a nested property like price_row.destination
+                      let fieldValue = field.split('.').reduce((obj, key) => obj && obj[key], item);
+                      return `<td>${fieldValue || "N/A"}</td>`;  // Display "N/A" if the value is undefined or null
+                  }).join("") + 
+                  `</tr>`;
+        tbody.innerHTML += row;
     });
+}
+window.addEventListener("load", function () {
+    const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+    const bookingDateInput = document.getElementById("booking-date");
+    bookingDateInput.value = today; // Set the input value to today's date
+    bookingDateInput.dispatchEvent(new Event("change")); // Manually trigger the change event
+});
 
 
-    $(document).ready(function() {
 
-        // if (window.location.pathname == "/admin_panel/public/shift") {
-
-        //     load_shift_data(1);
-        // } else {
-        //     load_data();
-        // }
-    });
-
-
-
-    $(document).on('click', '.pagination a', function(e) {
-        // Load pagination
-        if (window.location.pathname == "/shift") {
-            e.preventDefault();
-            b_page = e.target.innerText;
-            const conv = +b_page;
-            if (conv) {
-                load_shift_data(e.target.innerText, $('#B_search').val());
-            } else {
-                const element = document.querySelector('[aria-label="' + b_page + '"]');
-                b_page = element.getAttribute("href").split("=")[1]
-                load_shift_data(b_page, $('#B_search').val());
-            }
-        }
-
-    });
-
-
-
-    $(document).on('input', '#B_search', function(e) {
-        load_shift_data(1, e.target.value);
-    });
-
-
-
-    $(document).on('click', '.refresh_data_b', function() {
-        load_shift_data(1);
-
-    });
-
-
-    $(document).on('click', '.download_csv', function() {
-        if ($("#search").is(":visible")) {
-            $.ajax({
-                url: '{{ url("export_data") }}',
-                type: 'POST',
-                data: {
-                    page: page,
-                    keyword: $('#search').val(),
-                    start: start_date,
-                    end: end_date,
-                    per_page: per_page
-                },
-                dataType: 'json',
-
-
-                success: function(data) {
-                    if (data) {
-                        // Create a Blob with the CSV data
-                        var blob = new Blob([data], {
-                            type: 'text/csv'
-                        });
-
-                        // Create a temporary link element
-                        var link = document.createElement('a');
-                        link.href = URL.createObjectURL(blob);
-                        link.download = 'pneumatic_data.csv'; // Set the download file name
-                        link.click();
-
-                        // Clean up
-                        URL.revokeObjectURL(link.href);
-                        link.remove();
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                }
-
-            });
-        } else {
-
-        }
-    });
-
-    $(document).on('click', '#back', function() {
-
-        load_data(page, $('#search').val(), start_date, end_date);
-    });
-
-    $(document).on('change', '#export_check', function(e) {
-        if (this.checked) {
-            console.log(e.target.value);
-            export_ids.push(e.target.value);
-        } else {
-            export_ids = export_ids.filter(arrayItem => arrayItem !== e.target.value);
-        }
-        if (export_ids.length >= 1) {
-            $('#row_data_down').show();
-        } else {
-            $('#search_wrap').removeClass('col-sm-3');
-            $('#row_data_down').hide();
-        }
-    });
-
-    $(document).on('click', '#row_data_down', function() {
-
-        console.log(export_ids);
-        $.ajax({
-            url: '{{ url("export_raw_data_array") }}',
-            type: 'POST',
-            data: {
-                ids: export_ids
-            },
-            dataType: 'json',
-
-
-            success: function(data) {
-                if (data) {
-                    // Create a Blob with the CSV data
-                    // console.log(data);
-                    var blob = new Blob([data], {
-                        type: 'text/csv'
-                    });
-
-                    // Create a temporary link element
-                    var link = document.createElement('a');
-                    link.href = URL.createObjectURL(blob);
-                    link.download = 'raw_data_bulk.csv'; // Set the download file name
-                    link.click();
-
-                    // Clean up
-                    URL.revokeObjectURL(link.href);
-                    link.remove();
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-            }
-
-        });
-    });
-
-    function load_data() {
-        // Send AJAX request
-        $.ajax({
-            url: '{{ url("get_data") }}',
-            type: 'POST',
-            data: {},
-            dataType: 'json',
-
-            success: function(response) {
-
-                // console.log(JSON.parse(response.data.data_set).relayStatus_1)
-
-                //screen types
-
-                if (JSON.parse(response.data.data_set).SelectSrceen1_1 == 1) {
-                    $('#st_1').text('Small')
-                } else if (JSON.parse(response.data.data_set).SelectSrceen2_1 == 2) {
-                    $('#st_1').text('Medium')
-                } else if (JSON.parse(response.data.data_set).SelectSrceen3_1 == 3) {
-                    $('#st_1').text('Large')
-                } else {
-                    $('#st_1').text('Not Select')
-                }
-
-                if (JSON.parse(response.data.data_set).SelectSrceen1_2 == 1) {
-                    $('#st_2').text('Small')
-                } else if (JSON.parse(response.data.data_set).SelectSrceen2_2 == 2) {
-                    $('#st_2').text('Medium')
-                } else if (JSON.parse(response.data.data_set).SelectSrceen3_2 == 3) {
-                    $('#st_2').text('Large')
-                } else {
-                    $('#st_2').text('Not Select')
-                }
-
-                if (JSON.parse(response.data.data_set).SelectSrceen1_3 == 1) {
-                    $('#st_3').text('Small')
-                } else if (JSON.parse(response.data.data_set).SelectSrceen2_3 == 2) {
-                    $('#st_3').text('Medium')
-                } else if (JSON.parse(response.data.data_set).SelectSrceen3_3 == 3) {
-                    $('#st_3').text('Large')
-                } else {
-                    $('#st_3').text('Not Select')
-                }
-
-                //screen status
-                if (JSON.parse(response.data.data_set).screenRemoveStat_1 == 1) {
-                    $('#ss_1').text('Not Available')
-                } else {
-                    $('#ss_1').text('Available')
-                }
-
-                if (JSON.parse(response.data.data_set).screenRemoveStat_2 == 1) {
-                    $('#ss_2').text('Not Available')
-                } else {
-                    $('#ss_2').text('Available')
-                }
-
-                if (JSON.parse(response.data.data_set).screenRemoveStat_3 == 1) {
-                    $('#ss_3').text('Not Available')
-                } else {
-                    $('#ss_3').text('Available')
-                }
-
-                //screen count
-                $('#sc_1').text(JSON.parse(response.data.data_set).screenCount_1)
-                $('#sc_2').text(JSON.parse(response.data.data_set).screenCount_2)
-                $('#sc_3').text(JSON.parse(response.data.data_set).screenCount_3)
-
-
-                //garment count
-
-                $('#fc_1').text(JSON.parse(response.data.data_set).openCount_1)
-                $('#fc_2').text(JSON.parse(response.data.data_set).openCount_2)
-                $('#fc_3').text(JSON.parse(response.data.data_set).openCount_3)
-
-                //down time
-
-                var downTime_1 = convertSecondsToHMS(JSON.parse(response.data.data_set).downTime_1);
-                $('#dt_1').text(downTime_1)
-                var downTime_2 = convertSecondsToHMS(JSON.parse(response.data.data_set).downTime_2);
-                $('#dt_2').text(downTime_2)
-                var downTime_3 = convertSecondsToHMS(JSON.parse(response.data.data_set).downTime_3);
-                $('#dt_3').text(downTime_3)
-
-
-            }
-        });
-
-        setTimeout(function() {
-                load_data();
-            },
-            3000);
-    }
-
-    function convertSecondsToHMS(seconds) {
-        var hrs = Math.floor(seconds / 3600);
-        var mins = Math.floor((seconds % 3600) / 60);
-        var secs = seconds % 60;
-        return hrs + 'h ' + mins + 'm ' + secs + 's';
-    }
-
-    function load_shift_data(page, keyword) {
-        // Send AJAX request
-        $.ajax({
-            url: '{{ url("getShifts") }}',
-            type: 'POST',
-            data: {
-                page: page,
-                keyword: keyword
-            },
-            dataType: 'json',
-
-            success: function(response) {
-                console.log(response);
-                $('#B_table').html(response.table_data);
-                $('#B_pagination').html(response.links);
-            }
-        });
-
-    }
-
-    function save_shift_data() {
-        // Send AJAX request
-        if (shift_id != '') {
-            $.ajax({
-                url: '{{ url("/shift/update") }}',
-                type: 'POST',
-                data: {
-                    id: shift_id,
-                    date: $('#s_date').val(),
-                    screen_count: $('#s_screen').val(),
-                    garment_count: $('#s_garment').val(),
-                    start_time: $('#s_start').val(),
-                    end_time: $('#s_end').val()
-                },
-                dataType: 'json',
-
-                success: function(response) {
-                    clear_shift_data()
-                    load_shift_data(1)
-                }
-            });
-        } else {
-            $.ajax({
-                url: '{{ url("/shift/insert") }}',
-                type: 'POST',
-                data: {
-                    date: $('#s_date').val(),
-                    screen_count: $('#s_screen').val(),
-                    garment_count: $('#s_garment').val(),
-                    start_time: $('#s_start').val(),
-                    end_time: $('#s_end').val()
-                },
-                dataType: 'json',
-
-                success: function(response) {
-                    clear_shift_data()
-                    load_shift_data(1)
-                }
-            });
-        }
-    }
-
-
-
-    function edit_shift_data(id, date, screen, garment, start, end) {
-        shift_id = id;
-        $('#s_date').val(date);
-        $('#s_screen').val(screen);
-        $('#s_garment').val(garment);
-        $('#s_start').val(start);
-        $('#s_end').val(end);
-        $('#s_title').text("Update Shift");
-        $('#s_save').text("Update");
-    }
-
-    function clear_shift_data() {
-        shift_id = '';
-        $('#s_date').val('');
-        $('#s_screen').val('');
-        $('#s_garment').val('');
-        $('#s_start').val('');
-        $('#s_end').val('');
-        $('#s_title').text("Save Shift");
-        $('#s_save').text("Save");
-    }
-
-
-
-
-
-    function delete_battery_data(id) {
-        battery_del = id;
-        document.getElementById('del').click();
-    }
-
-    function delete_data_popup() {
-
-        $.ajax({
-            url: '{{ url("delete_shift_data") }}',
-            type: 'POST',
-            data: {
-                id: battery_del
-            },
-            dataType: 'json',
-
-            success: function(response) {
-                document.getElementById('close_del_2').click();
-                if (response.deleted == 1) {
-                    load_shift_data(b_page, $('#B_search').val());
-                }
-            }
-        });
-
-
-    }
-
-    function view_shift_data(id) {
-
-        // view = id;
-        $('#mst_1').text('')
-        $('#mst_2').text('')
-        $('#mst_3').text('')
-        $('#mss_1').text('')
-        $('#mss_2').text('')
-        $('#mss_3').text('')
-        $('#msc_1').text('')
-        $('#msc_2').text('')
-        $('#msc_3').text('')
-        $('#mfc_1').text('')
-        $('#mfc_2').text('')
-        $('#mfc_3').text('')
-        $('#mdt_1').text('')
-        $('#mdt_2').text('')
-        $('#mdt_3').text('')
-        $.ajax({
-            url: '{{ url("get_data_shift") }}',
-            type: 'POST',
-            data: {
-                id: id
-            },
-            dataType: 'json',
-
-            success: function(response) {
-
-                // console.log(JSON.parse(response.data.data_set).relayStatus_1)
-
-                //screen types
-
-                if (JSON.parse(response.data.data_set).SelectSrceen1_1 == 1) {
-                    $('#mst_1').text('Small')
-                } else if (JSON.parse(response.data.data_set).SelectSrceen2_1 == 2) {
-                    $('#mst_1').text('Medium')
-                } else if (JSON.parse(response.data.data_set).SelectSrceen3_1 == 3) {
-                    $('#mst_1').text('Large')
-                } else {
-                    $('#mst_1').text('Not Select')
-                }
-
-                if (JSON.parse(response.data.data_set).SelectSrceen1_2 == 1) {
-                    $('#mst_2').text('Small')
-                } else if (JSON.parse(response.data.data_set).SelectSrceen2_2 == 2) {
-                    $('#mst_2').text('Medium')
-                } else if (JSON.parse(response.data.data_set).SelectSrceen3_2 == 3) {
-                    $('#mst_2').text('Large')
-                } else {
-                    $('#mst_2').text('Not Select')
-                }
-
-                if (JSON.parse(response.data.data_set).SelectSrceen1_3 == 1) {
-                    $('#mst_3').text('Small')
-                } else if (JSON.parse(response.data.data_set).SelectSrceen2_3 == 2) {
-                    $('#mst_3').text('Medium')
-                } else if (JSON.parse(response.data.data_set).SelectSrceen3_3 == 3) {
-                    $('#mst_3').text('Large')
-                } else {
-                    $('#mst_3').text('Not Select')
-                }
-
-                //screen status
-                if (JSON.parse(response.data.data_set).screenRemoveStat_1 == 1) {
-                    $('#mss_1').text('Not Available')
-                } else {
-                    $('#mss_1').text('Available')
-                }
-
-                if (JSON.parse(response.data.data_set).screenRemoveStat_2 == 1) {
-                    $('#mss_2').text('Not Available')
-                } else {
-                    $('#mss_2').text('Available')
-                }
-
-                if (JSON.parse(response.data.data_set).screenRemoveStat_3 == 1) {
-                    $('#mss_3').text('Not Available')
-                } else {
-                    $('#mss_3').text('Available')
-                }
-
-                //screen count
-                $('#msc_1').text(JSON.parse(response.data.data_set).screenCount_1)
-                $('#msc_2').text(JSON.parse(response.data.data_set).screenCount_2)
-                $('#msc_3').text(JSON.parse(response.data.data_set).screenCount_3)
-
-
-                //garment count
-
-                $('#mfc_1').text(JSON.parse(response.data.data_set).openCount_1)
-                $('#mfc_2').text(JSON.parse(response.data.data_set).openCount_2)
-                $('#mfc_3').text(JSON.parse(response.data.data_set).openCount_3)
-
-                //down time
-
-                var downTime_1 = convertSecondsToHMS(JSON.parse(response.data.data_set).downTime_1);
-                $('#mdt_1').text(downTime_1)
-                var downTime_2 = convertSecondsToHMS(JSON.parse(response.data.data_set).downTime_2);
-                $('#mdt_2').text(downTime_2)
-                var downTime_3 = convertSecondsToHMS(JSON.parse(response.data.data_set).downTime_3);
-                $('#mdt_3').text(downTime_3)
-
-
-            }
-        });
-
-        document.getElementById('remark').click();
-    }
+  
 </script>
 
 </html>

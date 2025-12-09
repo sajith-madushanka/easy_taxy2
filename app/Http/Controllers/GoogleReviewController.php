@@ -10,7 +10,10 @@ class GoogleReviewController extends Controller
     public function getReviews()
     {
         // Your Google API key
-        $apiKey = 'AIzaSyBqiMW60sG9pVY-eH_Qf2tjB0cd_KXYnOU';
+        // $apiKey = 'AIzaSyBqiMW60sG9pVY-eH_Qf2tjB0cd_KXYnOU';
+        $apiKey = 'AIzaSyA01Q98EvUK0YMXsf4qa_3UUPrhNTB_hBQ';
+        
+
         // The Google Place ID for your business
         $placeId = 'ChIJH-opw7Zl5DoRBeKvRmnbNok';
         

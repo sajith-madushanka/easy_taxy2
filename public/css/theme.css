@@ -10123,7 +10123,40 @@
   
   
   }
+
+  .error-message{
+
+    color: red;
+    display: block;
+    color: red !important;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid red;
+    background-color: rgba(255, 0, 0, 0.1) !important;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+    display: none; 
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+  }
   
+  .error-message2{
+
+    color: red;
+    display: block;
+    color: red !important;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid red;
+    background-color: rgba(255, 0, 0, 0.1) !important;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+    display: none; 
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+  }
   
   /* Custom arrow */
   select::after {
@@ -10451,6 +10484,10 @@
     margin-bottom: 20px; /* Space between image and title */
     object-fit: cover; /* Ensures the image covers the space without distortion */
   }
+
+
+
+
   
   @media (max-width: 600px) {
     .btn-outline-light{
@@ -10500,6 +10537,13 @@
   }
   .select-book {
       padding: 6px 14px;
+  }
+  .custom-col-1 {
+    display: none; /* Remove col-1 elements on smaller screens */
+  }
+  
+  .custom-col-4 {
+    width: 50%; /* Change col-4 to col-6 (50% width) on smaller screens */
   }
   }
   
@@ -10552,6 +10596,14 @@
   .select-book {
       padding: 6px 14px;
   }
+  .custom-col-1 {
+    display: none; /* Remove col-1 elements on smaller screens */
+  }
+  
+  .custom-col-4 {
+    width: 50%; /* Change col-4 to col-6 (50% width) on smaller screens */
+  }
+ 
   }
   
   /* Tablets (Portrait) */
@@ -10572,10 +10624,33 @@
   .container2_low{
               padding-top: 11vh;
   }
-  
+  .container, .container-sm, .container-md, .container-lg, .container-xl {
+    max-width: 92%;
+}
+.custom-col-1 {
+  display: none; /* Remove col-1 elements on smaller screens */
+}
+
+.custom-col-4 {
+  width: 50%; /* Change col-4 to col-6 (50% width) on smaller screens */
+}
+.image-namem{
+  padding-top: 60px;
+}
   }
   
   /* Tablets (Landscape) */
   @media (min-width: 1024px) and (max-width: 1279px) {
+    .image-namem{
+      padding-top: 60px;
+    }
     
   }
+  @media (min-width: 1200px) {
+    .container, .container-sm, .container-md, .container-lg, .container-xl {
+        max-width: 92%;
+    }
+    .image-namem{
+      padding-top: 60px;
+    }
+}

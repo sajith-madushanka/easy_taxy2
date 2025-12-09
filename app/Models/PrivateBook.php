@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class PrivateBook extends Model
 {
     use HasFactory;
+
+    protected $table = 'private_books';
     protected $fillable = [
         'private_price',
         'return_trip',
@@ -18,4 +20,9 @@ class PrivateBook extends Model
         'note',
         'price'
     ];
+
+    public function price_row()
+    {
+        return $this->hasOne(PrivatePrice::class, 'id', 'private_price');
+    }
 }

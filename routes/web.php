@@ -60,6 +60,7 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/login-user','loginUser')->name('login-user');
     Route::get('/dashboard','dashboard')->middleware('isLoggedIn');
     Route::get('/logout','logout');
+    Route::get('/bookings', [BookingController::class, 'bookings']);
 });
 
 Route::resource('minibus_price', MinibusPriceController::class);

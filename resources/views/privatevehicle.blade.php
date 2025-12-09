@@ -79,7 +79,7 @@
             <div class="row d-flex align-items-center">
                 <div class="col-12 col-lg-6 " data-aos="fade-right">
 
-                    <img src="img/webp/abstract6.webp" width="70%"  alt="abstract image" class="img-fluid position-relative rounded-5 shadow aos-init aos-animate" data-aos="fade-up">
+                    <img src="img/webp/private.webp" width="70%"  alt="abstract image" class="img-fluid position-relative rounded-5 shadow aos-init aos-animate" data-aos="fade-up">
 
                 </div>
                 <div class="col-12 col-lg-6"  id="private_div" data-aos="fade-left">
@@ -108,7 +108,7 @@
                        
                     </input>
                     <div id='dropdowntitle' class='dropdowntitle'> Time</div>
-                    <input  class="form_field" type="time"  id="time">
+                    <input  class="form_field" type="time"  id="time" value="12:00">
                        
                     </input>
                     <div id='dropdowntitle' class='dropdowntitle'> Return Trip</div>
@@ -116,7 +116,7 @@
                         <input class="form-check-input" id="return" style="padding: 7px" type="checkbox" >
                         <div id='dropdowntitle' class='dropdowntitle' style="padding: 7px"> No</div>
                     </div>
-                    <div id="error-message" style="display: none; color: red;"></div>
+                    <div id="error-message" class="form_field error-message"></div>
 
                     <div class="price-box" id="price_div" style=" display: none;">
                         <h2 class="price-2" id="price" data-aos="zoom-in-left"></h2>
@@ -148,7 +148,7 @@
                     <input  id="note" class="form_field" type="text" placeholder="Enter Note" >
                        
                     </input>
-                    <div id="error-message2" style="display: none; color: red;"></div>
+                    <div id="error-message2" class="form_field error-message"></div>
                     
                     
                     <div class="price-box">
@@ -314,6 +314,7 @@
             var date = $('#date').val();
             var time = $('#time').val();
             var returnTrip = $('#return').prop('checked');
+            
 
             var errorMessage = $('#error-message');
             errorMessage.hide();
@@ -365,6 +366,7 @@
             var returnTrip = $('#return').prop('checked');
             var name = $('#name').val();
             var telinput = $('#telinput').val();
+            var phoneNumber = $("#telinput").intlTelInput("getNumber").replace("+", "");
 
             var errorMessage = $('#error-message2');
             errorMessage.hide();
@@ -375,8 +377,8 @@
                 return; // Exit function if there is an error
             }
 
-            if (telinput === "" || telinput === null) {
-                errorMessage.text("Please Enter The Phone Number.");
+            if (!$("#telinput").intlTelInput("isValidNumber") || telinput === "" || telinput === null) {
+                errorMessage.text("Please Enter Valid Phone Number.");
                 errorMessage.show();
                 return;
             }
@@ -424,7 +426,7 @@
                     date:$('#date').val(),
                     time:$('#time').val(),
                     name:$('#name').val(),
-                    telinput:$('#telinput').val(),
+                    telinput:phoneNumber,
                     note:$('#note').val()
                 },
             

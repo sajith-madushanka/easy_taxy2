@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MinibusBook extends Model
 {
     use HasFactory;
+    protected $table = 'minibus_books';
     protected $fillable = [
         'destination',
         'seats',
@@ -17,4 +18,9 @@ class MinibusBook extends Model
         'note',
         'price'
     ];
+
+    public function price_row()
+    {
+        return $this->hasOne(MinibusPrice::class, 'id', 'destination');
+    }
 }

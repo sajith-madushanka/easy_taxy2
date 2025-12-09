@@ -22,7 +22,7 @@ class BookingController extends Controller
         try {
 
             $dataQuery = MinibusPrice::query();
-            $minibusPrices = $dataQuery->orderBy('destination', 'desc')->get();
+            $minibusPrices = $dataQuery->orderBy('destination', 'asc')->get();
 
             $options = '<option value="" disabled selected>Select the destination</option>';
             foreach ($minibusPrices as $price) {
@@ -175,7 +175,6 @@ class BookingController extends Controller
         // Prepare the message content
         $seats = implode(", ", $selectedSeats);
         $message = "Your booking is confirmed for mini bus seats: $seats on $date. Our office will contact you briefly on WhatsApp by this number, +94774373545. With payment information.";
-        $phone = '94' . substr($phone, 1);
         // Send the SMS using notify.lk API
         $this->sendSMS($phone, $message);
 
@@ -186,6 +185,12 @@ class BookingController extends Controller
 
         // Send SMS to the admin
         $this->sendSMS($adminPhone, $adminMessage);
+
+        $adminPhone2 = "0742833545"; 
+        $adminPhone2 = '94' . substr($adminPhone2, 1); 
+
+        // Send SMS to the admin
+        $this->sendSMS($adminPhone2, $adminMessage);
     }
 
     function sendSMS($phone, $message) {
@@ -354,7 +359,6 @@ class BookingController extends Controller
     private function sendBookingConfirmation2($phone, $vehicleType, $date, $time,$name)
     {
         $message = "Your booking is confirmed for a $vehicleType on $date at $time. Our office will contact you briefly on WhatsApp by this number, +94774373545. With payment information.";
-        $phone = '94' . substr($phone, 1);
         $this->sendSMS($phone, $message);
 
         $adminPhone = "0774373545"; 
@@ -365,7 +369,34 @@ class BookingController extends Controller
 
         // Send SMS to the admin
         $this->sendSMS($adminPhone, $adminMessage);
+
+        $adminPhone2 = "0742833545"; 
+        $adminPhone2 = '94' . substr($adminPhone2, 1); 
+
+        // Send SMS to the admin
+        $this->sendSMS($adminPhone2, $adminMessage);
     }
 
+    public function bookings(Request $request)
+    {
+        try {
+            $date = $request->query('date');
+
+            $minibus = MinibusBook::where('date', $date)->with('price_row')->get();
+            $private = PrivateBook::where('date', $date)->with('price_row')->get();
+            // $safari = SafariBook::where('date', $date)->get();
+            $safari = [];
+            return response()->json([
+                'minibus' => $minibus,
+                'private' => $private,
+                'safari' => $safari
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Error fetching data.',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
     
 }

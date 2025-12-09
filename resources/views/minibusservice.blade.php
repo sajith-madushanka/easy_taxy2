@@ -79,7 +79,7 @@
                 <div class="row d-flex align-items-center" style="padding-top: 100px;">
                     <div class="col-12 col-lg-7 text-lg-end" data-aos="fade-right">
 
-                        <img src="img/webp/abstract18.webp" width="2280" height="1732" alt="abstract image" class="img-fluid position-relative rounded-5 shadow aos-init aos-animate" data-aos="fade-up">
+                        <img src="img/webp/minibus.webp" width="2280" height="1732" alt="abstract image" class="img-fluid position-relative rounded-5 shadow aos-init aos-animate" data-aos="fade-up">
 
                     </div>
                     <div class="col-12 col-lg-5" data-aos="fade-left" id="seat_div">
@@ -97,7 +97,7 @@
                             <input id="seat_name" class="form_field" style="border: none;" type="text" readonly>
                             <img src="img/webp/selected.webp" style="height: 21px;float: right; margin: 10px;"></img>
                         </div>
-                        <div id="error-message" style="display: none; color: red;"></div>
+                        <div id="error-message" class="form_field error-message"></div>
                         <div class="price-box" id="price_div"  style=" display: none;">
                             <h2 class=" price-2"  id="price" data-aos="zoom-in-left"></h2>
                         </div>
@@ -128,7 +128,7 @@
 
                         </input>
 
-                        <div id="error-message2" style="display: none; color: red;"></div>
+                        <div id="error-message2" class="form_field error-message"></div>
 
                         <div class="price-box">
                             <h2 class="price-2" id="price_2" data-aos="zoom-in-left"></h2>
@@ -164,7 +164,7 @@
                                 <td class="seat-container">
                                     <div id="seat_1" class="seat not-selected" onclick="selectSeat(1)" alt="Placeholder Image"></div>
                                     <div class='name d-flex justify-content-center align-items-center'>
-                                        1-A
+                                        1
                                     </div>
                                 </td>
                                 <td></td>
@@ -174,19 +174,19 @@
                                 <td class="seat-container">
                                     <div id="seat_2" class="seat not-selected" onclick="selectSeat(2)" alt="Placeholder Image"></div>
                                     <div class='name d-flex justify-content-center align-items-center'>
-                                        2-A
+                                        2
                                     </div>
                                 </td>
                                 <td class="seat-container">
                                     <div id="seat_3" class="seat not-selected" onclick="selectSeat(3)" alt="Placeholder Image"></div>
                                     <div class='name d-flex justify-content-center align-items-center'>
-                                        2-B
+                                        3
                                     </div>
                                 </td>
                                 <td class="seat-container">
                                     <div id="seat_4" class="seat not-selected" onclick="selectSeat(4)" alt="Placeholder Image"></div>
                                     <div class='name d-flex justify-content-center align-items-center'>
-                                        2-C
+                                        4
                                     </div>
                                 </td>
                             </tr>
@@ -194,19 +194,19 @@
                                 <td class="seat-container">
                                     <div id="seat_5" class="seat not-selected" onclick="selectSeat(5)" alt="Placeholder Image"></div>
                                     <div class='name d-flex justify-content-center align-items-center'>
-                                        3-A
+                                        5
                                     </div>
                                 </td>
                                 <td class="seat-container">
                                     <div id="seat_6" class="seat not-selected" onclick="selectSeat(6)" alt="Placeholder Image"></div>
                                     <div class='name d-flex justify-content-center align-items-center'>
-                                        3-B
+                                        6
                                     </div>
                                 </td>
                                 <td class="seat-container">
                                     <div id="seat_7" class="seat not-selected" onclick="selectSeat(7)" alt="Placeholder Image"></div>
                                     <div class='name d-flex justify-content-center align-items-center'>
-                                        3-C
+                                        7
                                     </div>
                                 </td>
                             </tr>
@@ -294,15 +294,41 @@
         
 
         function get_seats(date) {
-            booked_seats.forEach(seatNumber => {
-                let seatId = `seat_${seatNumber}`;
-                let seatElement = document.getElementById(seatId);
-
-                if (seatElement) {
-                    seatElement.classList.remove('selected');
-                    seatElement.classList.add('notselected');
-                }
+            var allSeats = document.querySelectorAll('[id^="seat_"]');  
+            allSeats.forEach(seat => {
+                seat.classList.remove('selected');
+                seat.classList.add('notselected');
             });
+            $('#price_div').hide();
+            $('#book_now').hide();
+            $('#seat_name').val("");
+            var errorMessage = $('#error-message');
+            errorMessage.hide();
+
+            var selectedDate = $('#date').val(); 
+            var currentDate = new Date();
+
+            var sriLankaTimeOffset = 5.5 * 60 * 60 * 1000; 
+            var currentSLTime = new Date(currentDate.getTime() + sriLankaTimeOffset);
+
+            var selectedDateObj = new Date(selectedDate + "T00:00:00Z"); 
+
+            if (selectedDateObj < currentSLTime) {
+                console.log("Selected date is in the past or today.");
+                
+                if (selectedDate === currentSLTime.toISOString().split('T')[0]) {
+                    var selectedTime = new Date(selectedDate + "T09:30:00Z"); 
+                    if (currentSLTime > selectedTime) {
+                        errorMessage.text("You can only book for today before 9:30 AM Sri Lanka Time.");
+                        errorMessage.show();
+                        return;
+                    }
+                } else {
+                    errorMessage.text("The selected date is in the past. Please select a valid future date.");
+                    errorMessage.show();
+                    return;
+                }
+            }
             $.ajax({
                 url: '{{ url("minibus/date_seats") }}',
                 type: 'POST',
@@ -333,7 +359,8 @@
         }
 
         function selectSeat(seatNumber) {
-            if (booked_seats.includes(seatNumber)) {
+            seatNumber_str = seatNumber.toString();
+            if (booked_seats.includes(seatNumber_str)) {
                 console.log(`Seat ${seatNumber} is already booked. Cannot select.`);
             } else {
                 if (selected_seats.includes(seatNumber)) {
@@ -356,17 +383,17 @@
 
         }
 
-        function confirmSeats() {
-            if (selected_seats != []) {
+        $('#select_div').on('change', function() {
+            if (selected_seats.length !== 0) {
                 $seat_names = [];
                 const seatMap = {
-                    1: "1-A",
-                    2: "2-A",
-                    3: "2-B",
-                    4: "2-C",
-                    5: "3-A",
-                    6: "3-B",
-                    7: "3-C"
+                    1: "1",
+                    2: "2",
+                    3: "3",
+                    4: "4",
+                    5: "5",
+                    6: "6",
+                    7: "7"
                 };
 
 
@@ -374,6 +401,39 @@
 
                 const selectedSeatsString = seatNames.join(", ");
                 $('#seat_name').val(selectedSeatsString);
+                var destination = $('#select_div').val();
+                if (destination === "Select the destination" || destination === "" || destination === null) {
+                    $('#seat_div_popup').hide();
+                    $('#seat_div').show();
+                    return; 
+                }
+                var errorMessage = $('#error-message');
+                errorMessage.hide();
+                var selectedDate = $('#date').val(); 
+                var currentDate = new Date();
+
+                var sriLankaTimeOffset = 5.5 * 60 * 60 * 1000; 
+                var currentSLTime = new Date(currentDate.getTime() + sriLankaTimeOffset);
+
+                var selectedDateObj = new Date(selectedDate + "T00:00:00Z"); 
+
+                if (selectedDateObj < currentSLTime) {
+                    console.log("Selected date is in the past or today.");
+                    
+                    if (selectedDate === currentSLTime.toISOString().split('T')[0]) {
+                        var selectedTime = new Date(selectedDate + "T09:30:00Z"); 
+                        if (currentSLTime > selectedTime) {
+                            errorMessage.text("You can only book for today before 9:30 AM Sri Lanka Time.");
+                            errorMessage.show();
+                            return;
+                        }
+                    } else {
+                        errorMessage.text("The selected date is in the past. Please select a valid future date.");
+                        errorMessage.show();
+                        return;
+                    }
+                }
+               
                 $.ajax({
                     url: '{{ url("minibus/get_price") }}',
                     type: 'POST',
@@ -398,6 +458,98 @@
                 $('#seat_div_popup').hide();
                 $('#seat_div').show();
             }
+            else{
+                $('#price_div').hide();
+                $('#book_now').hide();
+                $('#seat_name').val("");
+            }
+        });
+        function confirmSeats() {
+            if (selected_seats.length !== 0) {
+                $seat_names = [];
+                const seatMap = {
+                    1: "1",
+                    2: "2",
+                    3: "3",
+                    4: "4",
+                    5: "5",
+                    6: "6",
+                    7: "7"
+                };
+
+
+                const seatNames = selected_seats.map(seatId => seatMap[seatId]);
+
+                const selectedSeatsString = seatNames.join(", ");
+                $('#seat_name').val(selectedSeatsString);
+                var destination = $('#select_div').val();
+                if (destination === "Select the destination" || destination === "" || destination === null) {
+                    $('#seat_div_popup').hide();
+                    $('#seat_div').show();
+                    return; 
+                }
+                var errorMessage = $('#error-message');
+                errorMessage.hide();
+                var selectedDate = $('#date').val(); 
+                var currentDate = new Date();
+
+                var sriLankaTimeOffset = 5.5 * 60 * 60 * 1000; 
+                var currentSLTime = new Date(currentDate.getTime() + sriLankaTimeOffset);
+
+                var selectedDateObj = new Date(selectedDate + "T00:00:00Z"); 
+
+                if (selectedDateObj < currentSLTime) {
+                    console.log("Selected date is in the past or today.");
+                    
+                    if (selectedDate === currentSLTime.toISOString().split('T')[0]) {
+                        var selectedTime = new Date(selectedDate + "T09:30:00Z"); 
+                        if (currentSLTime > selectedTime) {
+                            errorMessage.text("You can only book for today before 9:30 AM Sri Lanka Time.");
+                            errorMessage.show();
+                            $('#seat_div_popup').hide();
+                            $('#seat_div').show();
+                            return;
+                        }
+                    } else {
+                        errorMessage.text("The selected date is in the past. Please select a valid future date.");
+                        errorMessage.show();
+                        $('#seat_div_popup').hide();
+                            $('#seat_div').show();
+                        return;
+                    }
+                }
+               
+                $.ajax({
+                    url: '{{ url("minibus/get_price") }}',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        selected_seats: selected_seats,
+                        destination: $('#select_div').val(),
+                        date: $('#date').val()
+                    },
+                   
+                    dataType: 'json',
+
+                    success: function(response) {
+                        $('#price_div').show();
+                        $('#price').text(response.price + "LKR");
+                        $('#price_2').text(response.price + "LKR");
+                        $('#book_now').show();
+                    }
+                });
+                $('#seat_div_popup').hide();
+                $('#seat_div').show();
+            }
+            else{
+                $('#price_div').hide();
+                $('#book_now').hide();
+                $('#seat_name').val("");
+                $('#seat_div_popup').hide();
+                $('#seat_div').show();
+            }
 
         }
 
@@ -407,7 +559,8 @@
             var date = $('#date').val();
             var name = $('#name').val();
             var telinput = $('#telinput').val();
-
+            var phoneNumber = $("#telinput").intlTelInput("getNumber").replace("+", "");
+            
 
             var errorMessage = $('#error-message2');
             errorMessage.hide();
@@ -417,13 +570,13 @@
                 return; // Exit function if there is an error
             }
 
-            if (telinput === "" || telinput === null) {
-                errorMessage.text("Please Enter The Phone Number.");
+            if (!$("#telinput").intlTelInput("isValidNumber") || telinput === "" || telinput === null) {
+                errorMessage.text("Please Enter Valid Phone Number.");
                 errorMessage.show();
                 return;
             }
 
-            if (destination === "Select the destination" || destination === "") {
+            if (destination === "Select the destination" || destination === ""  || destination === null ) {
                 errorMessage.text("There is an issue with your data. Please Refresh the Page.");
                 errorMessage.show();
                 return; // Exit function if there is an error
@@ -446,7 +599,7 @@
                         destination: $('#select_div').val(),
                         date: $('#date').val(),
                         name: $('#name').val(),
-                        phone: $('#telinput').val(),
+                        phone: phoneNumber,
                         note: $('#note').val()
                     },
                    
@@ -479,7 +632,7 @@
             var errorMessage = $('#error-message');
             errorMessage.hide();
 
-            if (destination === "Select the destination" || destination === "") {
+            if (destination === "Select the destination" || destination === "" || destination === null ) {
                 errorMessage.text("Please select a Destination.");
                 errorMessage.show();
                 return; // Exit function if there is an error

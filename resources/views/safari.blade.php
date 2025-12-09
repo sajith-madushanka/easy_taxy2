@@ -78,7 +78,7 @@
             <div class="row d-flex align-items-center">
                 <div class="col-12 col-lg-7 text-lg-center" data-aos="fade-right">
 
-                    <img src="img/webp/abstract9.webp"     width= "81%"  alt="abstract image" class="img-fluid position-relative rounded-5 shadow aos-init aos-animate" data-aos="fade-up">
+                    <img src="img/webp/safari.webp"     width= "81%"  alt="abstract image" class="img-fluid position-relative rounded-5 shadow aos-init aos-animate" data-aos="fade-up">
 
                 </div>
                 <!-- <div class="col-12 col-lg-5" id="safari_div"  data-aos="fade-left">
